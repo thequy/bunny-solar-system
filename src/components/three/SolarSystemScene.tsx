@@ -21,10 +21,11 @@ export default function SolarSystemScene({ onPlanetSelect, selectedPlanet }: Sol
       <ambientLight intensity={0.3} />
       <Suspense fallback={null}>
         <Stars />
-        <Sun />
+        <Sun onClick={onPlanetSelect} />
         {planetIds.map((id) => (
           <Planet
             key={id}
+            id={id}
             data={PLANET_DATA[id]}
             onClick={onPlanetSelect}
             isSelected={selectedPlanet === id}

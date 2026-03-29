@@ -4,7 +4,11 @@ import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-export default function Sun() {
+interface SunProps {
+  onClick?: (id: string) => void;
+}
+
+export default function Sun({ onClick }: SunProps) {
   const sunRef = useRef<THREE.Mesh>(null);
   
   useFrame(() => {
@@ -13,9 +17,13 @@ export default function Sun() {
     }
   });
 
+  const handleClick = () => {
+    if (onClick) onClick('sun');
+  };
+
   return (
     <group>
-      <mesh ref={sunRef}>
+      <mesh ref={sunRef} onClick={handleClick}>
         <sphereGeometry args={[4, 32, 32]} />
         <meshBasicMaterial color={0xffdd00} />
       </mesh>

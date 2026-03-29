@@ -6,12 +6,13 @@ import * as THREE from 'three';
 import { PlanetData } from '@/types';
 
 interface PlanetProps {
+  id: string;
   data: PlanetData;
   onClick: (id: string) => void;
   isSelected: boolean;
 }
 
-export default function Planet({ data, onClick, isSelected }: PlanetProps) {
+export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const initialAngle = useMemo(() => Math.random() * Math.PI * 2, []);
   
@@ -25,7 +26,7 @@ export default function Planet({ data, onClick, isSelected }: PlanetProps) {
   });
 
   const handleClick = () => {
-    onClick(Object.keys(data)[0] || 'unknown');
+    onClick(id);
   };
 
   return (
