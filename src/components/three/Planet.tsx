@@ -15,15 +15,26 @@ interface PlanetProps {
 
 export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const moonRef = useRef<THREE.Mesh>(null);
   const initialAngle = useMemo(() => Math.random() * Math.PI * 2, []);
+  const moonInitialAngle = useMemo(() => Math.random() * Math.PI * 2, []);
   const [isHovered, setIsHovered] = useState(false);
+  const orbitRadius = data.size * 2;
   
   useFrame((state) => {
     if (meshRef.current) {
       const time = state.clock.getElapsedTime();
-      meshRef.current.position.x = Math.cos(initialAngle + time * data.speed * 10) * data.distance;
-      meshRef.current.position.z = Math.sin(initialAngle + time * data.speed * 10) * data.distance;
+      const planetX = Math.cos(initialAngle + time * data.speed * 10) * data.distance;
+      const planetZ = Math.sin(initialAngle + time * data.speed * 10) * data.distance;
+      
+      meshRef.current.position.x = planetX;
+      meshRef.current.position.z = planetZ;
       meshRef.current.rotation.y += 0.01;
+
+      if (moonRef.current && id === 'earth') {
+        moonRef.current.position.x = planetX + Math.cos(moonInitialAngle + time * 0.5) * orbitRadius;
+        moonRef.current.position.z = planetZ + Math.sin(moonInitialAngle + time * 0.5) * orbitRadius;
+      }
     }
   });
 
@@ -76,6 +87,12 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
           </Html>
         )}
       </mesh>
+      {id === 'earth' && (
+        <mesh ref={moonRef} position={[Math.cos(initialAngle) * data.distance + orbitRadius, 0, Math.sin(initialAngle) * data.distance]}>
+          <sphereGeometry args={[0.3, 16, 16]} />
+          <meshStandardMaterial color={0xcccccc} roughness={0.9} metalness={0.1} />
+        </mesh>
+      )}
     </group>
   );
 }
