@@ -163,5 +163,23 @@ export const PLANET_DATA: Record<string, PlanetData> = {
       vi: "Sao Hải Vương là hành tinh xa nhất từ Mặt Trời.",
       en: "Neptune is the farthest planet from the Sun."
     }
+  },
+  moon: {
+    name: { vi: "Mặt Trăng", en: "Moon" },
+    type: "satellite",
+    diameter: 3474,
+    temperature: -173,
+    distanceFromSun: 149.6,
+    orbitalPeriod: 27.3,
+    moons: 0,
+    color: 0xcccccc,
+    size: 0.3,
+    distance: 20,
+    speed: 0,
+    features: ["Vệ tinh tự nhiên của Trái Đất", "Người duy nhất đặt chân"],
+    description: { 
+      vi: "Mặt Trăng là vệ tinh tự nhiên duy nhất của Trái Đất và là vệ tinh lớn thứ 5 trong hệ mặt trời.",
+      en: "The Moon is Earth's only natural satellite and the fifth largest moon in the Solar System."
+    }
   }
 };

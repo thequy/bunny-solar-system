@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { PlanetData } from '@/types';
+import { PLANET_DATA } from '@/data/planets';
 
 interface PlanetProps {
   id: string;
@@ -22,13 +23,7 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
   const [isMoonHovered, setIsMoonHovered] = useState(false);
   const orbitRadius = data.size * 2;
 
-  const moonData = {
-    name: { vi: 'Mặt Trăng', en: 'Moon' },
-    description: { 
-      vi: 'Mặt Trăng là vệ tinh tự nhiên duy nhất của Trái Đất.',
-      en: 'The Moon is Earth\'s only natural satellite.'
-    }
-  };
+  const moonData = PLANET_DATA.moon;
   
   useFrame((state) => {
     if (meshRef.current) {
