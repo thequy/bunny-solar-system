@@ -19,7 +19,16 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
   const initialAngle = useMemo(() => Math.random() * Math.PI * 2, []);
   const moonInitialAngle = useMemo(() => Math.random() * Math.PI * 2, []);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMoonHovered, setIsMoonHovered] = useState(false);
   const orbitRadius = data.size * 2;
+
+  const moonData = {
+    name: { vi: 'Mặt Trăng', en: 'Moon' },
+    description: { 
+      vi: 'Mặt Trăng là vệ tinh tự nhiên duy nhất của Trái Đất.',
+      en: 'The Moon is Earth\'s only natural satellite.'
+    }
+  };
   
   useFrame((state) => {
     if (meshRef.current) {
@@ -49,6 +58,16 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
 
   const handlePointerOut = () => {
     setIsHovered(false);
+    document.body.style.cursor = 'auto';
+  };
+
+  const handleMoonPointerOver = () => {
+    setIsMoonHovered(true);
+    document.body.style.cursor = 'pointer';
+  };
+
+  const handleMoonPointerOut = () => {
+    setIsMoonHovered(false);
     document.body.style.cursor = 'auto';
   };
 
@@ -88,9 +107,27 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
         )}
       </mesh>
       {id === 'earth' && (
-        <mesh ref={moonRef} position={[Math.cos(initialAngle) * data.distance + orbitRadius, 0, Math.sin(initialAngle) * data.distance]}>
+        <mesh 
+          ref={moonRef} 
+          position={[Math.cos(initialAngle) * data.distance + orbitRadius, 0, Math.sin(initialAngle) * data.distance]}
+          onPointerOver={handleMoonPointerOver}
+          onPointerOut={handleMoonPointerOut}
+        >
           <sphereGeometry args={[0.3, 16, 16]} />
-          <meshStandardMaterial color={0xcccccc} roughness={0.9} metalness={0.1} />
+          <meshStandardMaterial 
+            color={0xcccccc} 
+            roughness={0.9} 
+            metalness={0.1}
+            emissive={isMoonHovered ? 0x222222 : 0x000000}
+          />
+          {isMoonHovered && (
+            <Html distanceFactor={15} position={[0, 0.8, 0]}>
+              <div className="planet-tooltip">
+                <div className="tooltip-name">{moonData.name.vi}</div>
+                <div className="tooltip-desc">{moonData.description.vi}</div>
+              </div>
+            </Html>
+          )}
         </mesh>
       )}
     </group>
