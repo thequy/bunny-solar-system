@@ -107,6 +107,7 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
           position={[Math.cos(initialAngle) * data.distance + orbitRadius, 0, Math.sin(initialAngle) * data.distance]}
           onPointerOver={handleMoonPointerOver}
           onPointerOut={handleMoonPointerOut}
+          onClick={() => onClick('moon')}
         >
           <sphereGeometry args={[0.3, 16, 16]} />
           <meshStandardMaterial 
