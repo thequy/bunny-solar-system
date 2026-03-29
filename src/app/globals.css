@@ -336,19 +336,19 @@ body {
   word-wrap: break-word;
   pointer-events: none;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  max-width: 200px;
+  max-width: 300px;
   text-align: center;
 }
 
 .tooltip-name {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: #ffd700;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .tooltip-desc {
-  font-size: 13px;
+  font-size: 16px;
   color: #ccc;
   line-height: 1.4;
   max-width: 180px;
