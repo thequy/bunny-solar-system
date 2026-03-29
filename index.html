@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System Explorer</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header id="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">Solar System Explorer</span>
+            </div>
+            <nav id="nav">
+                <button class="nav-btn active" data-view="solar">Hệ Mặt Trời</button>
+                <button class="nav-btn" data-view="exoplanet">Exoplanets</button>
+                <button class="nav-btn" data-view="compare">So sánh</button>
+                <button class="nav-btn" data-view="quiz">Quiz</button>
+            </nav>
+        </header>
+
+        <!-- Main Canvas Area -->
+        <main id="canvas-container"></main>
+
+        <!-- Info Panel -->
+        <aside id="info-panel">
+            <div class="panel-section">
+                <div class="panel-title">Thông tin hành tinh</div>
+                <div id="planet-card"></div>
+            </div>
+            <div class="panel-section">
+                <div class="panel-title">Thông số nhanh</div>
+                <div id="quick-facts"></div>
+            </div>
+        </aside>
+
+        <!-- Toolbar -->
+        <footer id="toolbar">
+            <button class="tool-btn active" data-tool="select">👆 Chọn hành tinh</button>
+            <button class="tool-btn" data-tool="measure">📏 Đo khoảng cách</button>
+            <button class="tool-btn" data-tool="zoom">🔍 Zoom</button>
+            <button class="tool-btn" data-tool="play">▶️ Chơi/Tạm dừng</button>
+            <button class="tool-btn" data-tool="settings">⚙️ Cài đặt</button>
+        </footer>
+    </div>
+
+    <!-- Modals Container -->
+    <div id="modals"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/data/planets.js"></script>
+    <script src="js/planets.js"></script>
+    <script src="js/controls.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
