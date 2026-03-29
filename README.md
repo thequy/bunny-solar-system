@@ -19,10 +19,12 @@
 ### Hiện tại (MVP)
 - 🌍 **Mô hình 3D** - Mặt Trời và 8 hành tinh với Three.js
 - 🎮 **Tương tác** - Xoay, zoom, click chọn hành tinh
+- 👆 **Hiệu ứng cursor** - Con trỏ chuyển thành hình bàn tay khi hover hành tinh
 - 📊 **Thông tin hành tinh** - Hiển thị chi tiết (đường kính, nhiệt độ, khoảng cách...)
 - 📏 **Công cụ đo lường** - Đo khoảng cách giữa các hành tinh
 - 🔄 **So sánh kích thước** - Modal hiển thị so sánh kích thước các hành tinh
 - ▶️ **Animation** - Cho phép tạm dừng/tiếp tục quỹ đạo
+- 🎨 **Logo & Favicon** - Sử dụng logo.png làm biểu tượng trang web
 
 ### Kế hoạch phát triển (Phase 2)
 - 🪐 **Exoplanets** - Danh sách các hành tinh ngoài hệ mặt trời (20-30 tiêu biểu)

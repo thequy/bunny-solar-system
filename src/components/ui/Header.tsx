@@ -18,7 +18,7 @@ export default function Header({ activeView, onViewChange }: HeaderProps) {
   return (
     <header className="header">
       <div className="logo">
-        <div className="logo-icon" />
+        <img src="/logo.png" alt="Logo" className="logo-img" />
         <span className="logo-text">Solar System Explorer</span>
       </div>
       <nav className="nav">

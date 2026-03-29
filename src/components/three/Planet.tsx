@@ -15,6 +15,7 @@ interface PlanetProps {
 export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const initialAngle = useMemo(() => Math.random() * Math.PI * 2, []);
+  const [isHovered, setIsHovered] = useState(false);
   
   useFrame((state) => {
     if (meshRef.current) {
@@ -29,6 +30,16 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
     onClick(id);
   };
 
+  const handlePointerOver = () => {
+    setIsHovered(true);
+    document.body.style.cursor = 'pointer';
+  };
+
+  const handlePointerOut = () => {
+    setIsHovered(false);
+    document.body.style.cursor = 'auto';
+  };
+
   return (
     <group>
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
@@ -38,6 +49,8 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
       <mesh
         ref={meshRef}
         onClick={handleClick}
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
         position={[Math.cos(initialAngle) * data.distance, 0, Math.sin(initialAngle) * data.distance]}
       >
         <sphereGeometry args={[data.size, 32, 32]} />

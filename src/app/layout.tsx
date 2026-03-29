@@ -4,6 +4,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Solar System Explorer',
   description: 'Khám phá hệ mặt trời tương tác',
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export default function RootLayout({
