@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -10,6 +10,7 @@ interface SunProps {
 
 export default function Sun({ onClick }: SunProps) {
   const sunRef = useRef<THREE.Mesh>(null);
+  const [isHovered, setIsHovered] = useState(false);
   
   useFrame(() => {
     if (sunRef.current) {
@@ -21,9 +22,24 @@ export default function Sun({ onClick }: SunProps) {
     if (onClick) onClick('sun');
   };
 
+  const handlePointerOver = () => {
+    setIsHovered(true);
+    document.body.style.cursor = 'pointer';
+  };
+
+  const handlePointerOut = () => {
+    setIsHovered(false);
+    document.body.style.cursor = 'auto';
+  };
+
   return (
     <group>
-      <mesh ref={sunRef} onClick={handleClick}>
+      <mesh 
+        ref={sunRef} 
+        onClick={handleClick}
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+      >
         <sphereGeometry args={[4, 32, 32]} />
         <meshBasicMaterial color={0xffdd00} />
       </mesh>
