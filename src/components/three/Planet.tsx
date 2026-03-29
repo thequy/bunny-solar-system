@@ -2,6 +2,7 @@
 
 import { useRef, useState, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { PlanetData } from '@/types';
 
@@ -65,6 +66,14 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
             <ringGeometry args={[data.size * 1.4, data.size * 2.2, 32]} />
             <meshBasicMaterial color={0xc9b96a} side={THREE.DoubleSide} transparent opacity={0.7} />
           </mesh>
+        )}
+        {isHovered && (
+          <Html distanceFactor={15} position={[0, data.size + 0.5, 0]}>
+            <div className="planet-tooltip">
+              <div className="tooltip-name">{data.name.vi}</div>
+              <div className="tooltip-desc">{data.description.vi}</div>
+            </div>
+          </Html>
         )}
       </mesh>
     </group>
