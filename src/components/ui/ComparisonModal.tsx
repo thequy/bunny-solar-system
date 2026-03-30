@@ -37,7 +37,7 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
           {planets.map((id) => {
             const data = PLANET_DATA[id];
             const scale = scaleFactors[id] || 1;
-            const size = Math.max(20, ((data.diameter / maxDiameter) * 300) * scale);
+            const size = Math.max(20, ((data.diameter / maxDiameter) * 380) * scale);
             const r = (data.color >> 16) & 255;
             const g = (data.color >> 8) & 255;
             const b = data.color & 255;
