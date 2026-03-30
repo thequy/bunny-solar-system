@@ -272,8 +272,10 @@ body {
   background: var(--bg-secondary);
   border-radius: 16px;
   padding: 32px;
-  max-width: 1200px;
-  width: 95%;
+  max-width: 1400px;
+  width: 98%;
+  max-height: 90vh;
+  overflow-y: auto;
   border: 1px solid var(--border);
 }
 

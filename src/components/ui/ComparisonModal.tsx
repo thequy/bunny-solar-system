@@ -22,11 +22,10 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
             ×
           </button>
         </div>
-        <div className="comparison-container" style={{ background: '#0a0a1e', minHeight: '500px', padding: '40px 20px' }}>
+        <div className="comparison-container" style={{ background: '#0a0a1e', minHeight: '550px', padding: '40px 30px', display: 'flex', justifyContent: 'center', gap: '40px' }}>
           {planets.map((id) => {
             const data = PLANET_DATA[id];
-            const height = Math.max(25, (data.diameter / maxDiameter) * 350);
-            const width = Math.max(30, height);
+            const size = Math.max(30, (data.diameter / maxDiameter) * 400);
             const r = (data.color >> 16) & 255;
             const g = (data.color >> 8) & 255;
             const b = data.color & 255;
@@ -35,12 +34,12 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
             const darkB = Math.max(0, b - 80);
 
             return (
-              <div key={id} className="comparison-bar">
+              <div key={id} className="comparison-bar" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div
                   style={{
-                    width: `${width}px`,
-                    height: `${height}px`,
-                    background: `radial-gradient(circle at 30% 30%, rgb(${r},${g},${b}), rgb(${darkR},${darkG},${darkB}))`,
+                    width: `${size}px`,
+                    height: `${size}px`,
+                    background: `radial-gradient(circle at 35% 35%, rgb(${r},${g},${b}), rgb(${darkR},${darkG},${darkB}))`,
                     borderRadius: '50%',
                     marginBottom: '12px',
                     boxShadow: `0 0 25px rgba(${r},${g},${b},0.6)`,
