@@ -13,15 +13,15 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
   const planets = ['mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
   const maxDiameter = 139820;
   const scaleFactors: Record<string, number> = {
-    moon: 0.3,
-    mars: 0.6,
-    mercury: 0.7,
-    venus: 0.85,
-    earth: 0.9,
-    uranus: 1.4,
-    neptune: 1.35,
-    saturn: 1,
-    jupiter: 1
+    moon: 0.25,
+    mars: 0.5,
+    mercury: 0.6,
+    venus: 0.75,
+    earth: 0.8,
+    uranus: 1.1,
+    neptune: 1.05,
+    saturn: 0.85,
+    jupiter: 0.9
   };
 
   return (
