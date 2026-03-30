@@ -22,13 +22,17 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
             ×
           </button>
         </div>
-        <div className="comparison-container" style={{ background: '#0a0a1e' }}>
+        <div className="comparison-container" style={{ background: '#0a0a1e', minHeight: '500px', padding: '40px 20px' }}>
           {planets.map((id) => {
             const data = PLANET_DATA[id];
-            const height = Math.max(20, (data.diameter / maxDiameter) * 300);
-            const width = Math.max(25, height);
-            const colorHex = data.color.toString(16).padStart(6, '0');
-            const darkColor = (data.color * 0.4).toString(16).padStart(6, '0');
+            const height = Math.max(25, (data.diameter / maxDiameter) * 350);
+            const width = Math.max(30, height);
+            const r = (data.color >> 16) & 255;
+            const g = (data.color >> 8) & 255;
+            const b = data.color & 255;
+            const darkR = Math.max(0, r - 80);
+            const darkG = Math.max(0, g - 80);
+            const darkB = Math.max(0, b - 80);
 
             return (
               <div key={id} className="comparison-bar">
@@ -36,10 +40,10 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
                   style={{
                     width: `${width}px`,
                     height: `${height}px`,
-                    background: `radial-gradient(circle at 30% 30%, #${colorHex}, #${darkColor})`,
+                    background: `radial-gradient(circle at 30% 30%, rgb(${r},${g},${b}), rgb(${darkR},${darkG},${darkB}))`,
                     borderRadius: '50%',
                     marginBottom: '12px',
-                    boxShadow: `0 0 20px rgba(${parseInt(colorHex.slice(0,2), 16)}, ${parseInt(colorHex.slice(2,4), 16)}, ${parseInt(colorHex.slice(4,6), 16)}, 0.5)`,
+                    boxShadow: `0 0 25px rgba(${r},${g},${b},0.6)`,
                   }}
                 />
                 <div style={{ fontSize: '14px', color: '#ffffff', fontWeight: '600' }}>{data.name.vi}</div>
