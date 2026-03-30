@@ -20,8 +20,8 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
     earth: 0.8,
     uranus: 1.1,
     neptune: 1.05,
-    saturn: 0.85,
-    jupiter: 0.9
+    saturn: 0.7,
+    jupiter: 0.75
   };
 
   return (
