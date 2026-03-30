@@ -82,9 +82,9 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
         <sphereGeometry args={[data.size, 32, 32]} />
         <meshStandardMaterial
           color={data.color}
-          roughness={0.4}
-          metalness={0.3}
-          emissive={isSelected ? 0x333333 : 0x111111}
+          roughness={0.2}
+          metalness={0.5}
+          emissive={isSelected ? 0x444444 : 0x222222}
         />
         {data.hasRings && (
           <mesh rotation={[Math.PI / 2.5, 0, 0]}>
@@ -112,9 +112,9 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
           <sphereGeometry args={[0.3, 16, 16]} />
           <meshStandardMaterial 
             color={0xcccccc} 
-            roughness={0.4} 
-            metalness={0.3}
-            emissive={isMoonHovered ? 0x333333 : 0x111111}
+            roughness={0.2} 
+            metalness={0.5}
+            emissive={isMoonHovered ? 0x444444 : 0x222222}
           />
           {isMoonHovered && (
             <Html distanceFactor={15} position={[0, 0.8, 0]}>
