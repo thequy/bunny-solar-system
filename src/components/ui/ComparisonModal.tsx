@@ -10,19 +10,8 @@ interface ComparisonModalProps {
 export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProps) {
   if (!isOpen) return null;
 
-  const planets = ['mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
+  const planets = ['mercury', 'venus', 'earth', 'moon', 'mars', 'neptune', 'uranus', 'saturn', 'jupiter'];
   const maxDiameter = 139820;
-  const scaleFactors: Record<string, number> = {
-    moon: 0.27,
-    mars: 0.53,
-    mercury: 0.38,
-    venus: 1.2,
-    earth: 1.3,
-    uranus: 0.9,
-    neptune: 0.5,
-    saturn: 0.6,
-    jupiter: 0.7
-  };
 
   return (
     <div className="modal-overlay visible" onClick={onClose}>
@@ -33,11 +22,11 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
             ×
           </button>
         </div>
-        <div className="comparison-container" style={{ background: '#0a0a1e', minHeight: '600px', padding: '50px 40px', display: 'flex', justifyContent: 'center', gap: '50px', flexWrap: 'wrap' }}>
+        <div className="comparison-container" style={{ background: '#0a0a1e', minHeight: '400px', padding: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '30px', flexWrap: 'wrap' }}>
           {planets.map((id) => {
             const data = PLANET_DATA[id];
-            const scale = scaleFactors[id] || 1;
-            const size = Math.max(18, ((data.diameter / maxDiameter) * 350) * scale);
+            const baseDiameter = 4879;
+            const size = Math.min(180, Math.max(8, (data.diameter / baseDiameter) * 10));
             const r = (data.color >> 16) & 255;
             const g = (data.color >> 8) & 255;
             const b = data.color & 255;

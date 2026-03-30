@@ -38,7 +38,6 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
-  border-bottom: 1px solid var(--border);
 }
 
 .logo {
@@ -48,8 +47,8 @@ body {
 }
 
 .logo-img {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
 }
 
@@ -274,8 +273,7 @@ body {
   padding: 32px;
   max-width: 1600px;
   width: 99%;
-  max-height: 95vh;
-  overflow-y: auto;
+  max-height: 90vh;
   border: 1px solid var(--border);
 }
 
