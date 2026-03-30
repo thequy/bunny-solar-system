@@ -84,8 +84,12 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
           color={data.color}
           roughness={0.2}
           metalness={0.5}
-          emissive={isSelected ? 0x444444 : 0x222222}
+          emissive={isSelected ? 0x555555 : 0x333333}
         />
+        <mesh>
+          <sphereGeometry args={[data.size * 1.15, 32, 32]} />
+          <meshBasicMaterial color={data.color} transparent opacity={0.15} side={THREE.BackSide} />
+        </mesh>
         {data.hasRings && (
           <mesh rotation={[Math.PI / 2.5, 0, 0]}>
             <ringGeometry args={[data.size * 1.4, data.size * 2.2, 32]} />
