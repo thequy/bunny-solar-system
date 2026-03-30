@@ -20,8 +20,8 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
     earth: 1.3,
     uranus: 0.9,
     neptune: 0.5,
-    saturn: 0.4,
-    jupiter: 0.45
+    saturn: 0.6,
+    jupiter: 0.7
   };
 
   return (
@@ -37,7 +37,7 @@ export default function ComparisonModal({ isOpen, onClose }: ComparisonModalProp
           {planets.map((id) => {
             const data = PLANET_DATA[id];
             const scale = scaleFactors[id] || 1;
-            const size = Math.max(20, ((data.diameter / maxDiameter) * 380) * scale);
+            const size = Math.max(18, ((data.diameter / maxDiameter) * 350) * scale);
             const r = (data.color >> 16) & 255;
             const g = (data.color >> 8) & 255;
             const b = data.color & 255;
