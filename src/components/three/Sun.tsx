@@ -57,7 +57,7 @@ export default function Sun({ onClick }: SunProps) {
         <sphereGeometry args={[4.5, 32, 32]} />
         <meshBasicMaterial color={0xffaa00} transparent opacity={0.3} />
       </mesh>
-      <pointLight color={0xffffee} intensity={2} distance={300} />
+      <pointLight color={0xffffee} intensity={3} distance={300} />
     </group>
   );
 }
