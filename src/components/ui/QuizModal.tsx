@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { QUIZ_QUESTIONS } from '@/data/quiz';
 
 interface QuizModalProps {
@@ -15,16 +15,45 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
   const [showResult, setShowResult] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
   const [streak, setStreak] = useState(0);
+  const isMounted = useRef(true);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
+    isMounted.current = true;
     setCurrentQuestion(0);
     setScore(0);
     setSelectedAnswer(null);
     setShowResult(false);
     setTimeLeft(15);
     setStreak(0);
+    return () => {
+      isMounted.current = false;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [isOpen]);
+
+  const handleAnswer = useCallback((answer: number) => {
+    if (!isMounted.current) return;
+    setSelectedAnswer(answer);
+    const correct = answer === QUIZ_QUESTIONS[currentQuestion].correct;
+    if (correct) {
+      setScore(s => s + 10 + streak * 2);
+      setStreak(s => s + 1);
+    } else {
+      setStreak(0);
+    }
+    timeoutRef.current = setTimeout(() => {
+      if (!isMounted.current) return;
+      if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
+        setCurrentQuestion(c => c + 1);
+        setSelectedAnswer(null);
+        setTimeLeft(15);
+      } else {
+        setShowResult(true);
+      }
+    }, 1000);
+  }, [currentQuestion, streak]);
 
   useEffect(() => {
     if (!isOpen || showResult) return;
@@ -38,27 +67,7 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [isOpen, currentQuestion, showResult]);
-
-  const handleAnswer = (answer: number) => {
-    setSelectedAnswer(answer);
-    const correct = answer === QUIZ_QUESTIONS[currentQuestion].correct;
-    if (correct) {
-      setScore(score + 10 + streak * 2);
-      setStreak(streak + 1);
-    } else {
-      setStreak(0);
-    }
-    setTimeout(() => {
-      if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
-        setCurrentQuestion(currentQuestion + 1);
-        setSelectedAnswer(null);
-        setTimeLeft(15);
-      } else {
-        setShowResult(true);
-      }
-    }, 1000);
-  };
+  }, [isOpen, currentQuestion, showResult, handleAnswer]);
 
   if (!isOpen) return null;
 
