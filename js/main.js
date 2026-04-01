@@ -7,7 +7,8 @@ class SolarSystemApp {
         this.cameraController = null;
         this.uiController = null;
         this.isPlaying = true;
-        
+        this.speedMultiplier = 1;
+
         this.init();
     }
 
@@ -21,26 +22,26 @@ class SolarSystemApp {
 
     initThreeJS() {
         this.scene = new THREE.Scene();
-        
+
         this.camera = new THREE.PerspectiveCamera(
             60,
             window.innerWidth / window.innerHeight,
             0.1,
             1000
         );
-        
+
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        
+
         const container = document.getElementById('canvas-container');
         const width = container.clientWidth;
         const height = container.clientHeight;
-        
+
         this.renderer.setSize(width, height);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setClearColor(0x000000, 0);
-        
+
         container.appendChild(this.renderer.domElement);
-        
+
         const ambientLight = new THREE.AmbientLight(0x333333);
         this.scene.add(ambientLight);
     }
@@ -56,13 +57,13 @@ class SolarSystemApp {
             this.renderer.domElement,
             this.solarSystem
         );
-        
+
         this.uiController = new UIController(this.solarSystem);
     }
 
     initEventListeners() {
         window.addEventListener('resize', () => this.onResize());
-        
+
         window.addEventListener('playToggle', (e) => {
             this.isPlaying = e.detail;
         });
@@ -72,7 +73,7 @@ class SolarSystemApp {
         const container = document.getElementById('canvas-container');
         const width = container.clientWidth;
         const height = container.clientHeight;
-        
+
         this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(width, height);
@@ -80,11 +81,11 @@ class SolarSystemApp {
 
     animate() {
         requestAnimationFrame(() => this.animate());
-        
+
         if (this.isPlaying) {
             this.solarSystem.update();
         }
-        
+
         this.cameraController.update();
         this.renderer.render(this.scene, this.camera);
     }
