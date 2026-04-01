@@ -24,13 +24,17 @@
 - 📏 **Công cụ đo lường** - Đo khoảng cách giữa các hành tinh
 - 🔄 **So sánh kích thước** - Modal hiển thị so sánh kích thước các hành tinh
 - ▶️ **Animation** - Cho phép tạm dừng/tiếp tục quỹ đạo
-- 🎨 **Logo & Favicon** - Sử dụng logo.png làm biểu tượng trang web
+- 🎨 **Logo & Favicon** - Sử dụng logo-02.png làm biểu tượng trang web
+- 🎨 **Sci-Fi UI** - Giao diện glass-morphism hiện đại
+- 🌙 **Mặt Trăng** - Mặt Trăng quay quanh Trái Đất
+- 🪨 **Vành đai tiểu hành tinh** - Giữa Sao Hoả và Sao Thủy
 
-### Kế hoạch phát triển (Phase 2)
-- 🪐 **Exoplanets** - Danh sách các hành tinh ngoài hệ mặt trời (20-30 tiêu biểu)
-- ❓ **Quiz** - Kiểm tra kiến thức về hệ mặt trời
-- 🔬 **Cross-section** - Xem mặt cắt bên trong hành tinh
-- 📚 **Animation giải thích** - Giải thích quỹ đạo và chuyển động
+### Quiz Mode
+- ❓ **Quiz** - Mini-game kiểm tra kiến thức về hệ mặt trời (10 câu hỏi, timer, điểm số)
+
+### Tính năng giáo dục
+- 🔬 **Cross-section** - Xem mặt cắt bên trong hành tinh (3 lớp: vỏ, mantel, lõi)
+- 🪐 **Exoplanets** - Danh sách 30 hành tinh ngoài hệ mặt trời với bộ lọc
 
 ## 🛠️ Công nghệ
 
