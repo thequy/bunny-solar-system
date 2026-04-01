@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import Stars from './Stars';
 import Sun from './Sun';
 import Planet from './Planet';
+import AsteroidBelt from './AsteroidBelt';
 import { PLANET_DATA } from '@/data/planets';
 
 interface SolarSystemSceneProps {
@@ -22,6 +23,7 @@ export default function SolarSystemScene({ onPlanetSelect, selectedPlanet }: Sol
       <pointLight position={[0, 0, 0]} intensity={1} color={0xffffff} />
       <Suspense fallback={null}>
         <Stars />
+        <AsteroidBelt />
         <Sun onClick={onPlanetSelect} />
         {planetIds.map((id) => (
           <Planet
