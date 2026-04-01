@@ -1,12 +1,23 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { QUIZ_QUESTIONS } from '@/data/quiz';
 
 interface QuizModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+const QUESTION_COUNT = 10;
 
 export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -17,6 +28,11 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
   const [streak, setStreak] = useState(0);
   const isMounted = useRef(true);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const shuffledQuestions = useMemo(() => {
+    const shuffled = shuffleArray(QUIZ_QUESTIONS);
+    return shuffled.slice(0, QUESTION_COUNT);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -36,7 +52,7 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
   const handleAnswer = useCallback((answer: number) => {
     if (!isMounted.current) return;
     setSelectedAnswer(answer);
-    const correct = answer === QUIZ_QUESTIONS[currentQuestion].correct;
+    const correct = answer === shuffledQuestions[currentQuestion].correct;
     if (correct) {
       setScore(s => s + 10 + streak * 2);
       setStreak(s => s + 1);
@@ -45,7 +61,7 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
     }
     timeoutRef.current = setTimeout(() => {
       if (!isMounted.current) return;
-      if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
+      if (currentQuestion < shuffledQuestions.length - 1) {
         setCurrentQuestion(c => c + 1);
         setSelectedAnswer(null);
         setTimeLeft(15);
@@ -53,7 +69,7 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
         setShowResult(true);
       }
     }, 1000);
-  }, [currentQuestion, streak]);
+  }, [currentQuestion, streak, shuffledQuestions]);
 
   useEffect(() => {
     if (!isOpen || showResult) return;
@@ -91,7 +107,7 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
     );
   }
 
-  const question = QUIZ_QUESTIONS[currentQuestion];
+  const question = shuffledQuestions[currentQuestion];
 
   return (
     <div className="modal-overlay visible" onClick={onClose}>
@@ -102,7 +118,7 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
         </div>
         <div style={{ padding: '20px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-            <span>Câu {currentQuestion + 1}/{QUIZ_QUESTIONS.length}</span>
+            <span>Câu {currentQuestion + 1}/{shuffledQuestions.length}</span>
             <span style={{ color: timeLeft <= 5 ? '#ff4444' : '#ffd700' }}>
               ⏱️ {timeLeft}s
             </span>
@@ -118,7 +134,7 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
               background: '#ffd700', 
               height: '100%', 
               borderRadius: '4px',
-              width: `${((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100}%`,
+              width: `${((currentQuestion + 1) / shuffledQuestions.length) * 100}%`,
               transition: 'width 0.3s'
             }} />
           </div>
