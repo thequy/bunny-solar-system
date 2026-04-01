@@ -8,6 +8,7 @@ import Toolbar from '@/components/ui/Toolbar';
 import ComparisonModal from '@/components/ui/ComparisonModal';
 import QuizModal from '@/components/ui/QuizModal';
 import CrossSectionModal from '@/components/ui/CrossSectionModal';
+import ExoplanetView from '@/components/ui/ExoplanetView';
 import { PLANET_DATA } from '@/data/planets';
 import { ViewMode, ToolMode } from '@/types';
 
@@ -52,12 +53,16 @@ export default function SolarSystemApp() {
     <div className="app">
       <Header activeView={activeView} onViewChange={handleViewChange} />
       <main className="canvas-area">
-        <Suspense fallback={<div>Loading...</div>}>
-          <SolarSystemScene
-            onPlanetSelect={handlePlanetSelect}
-            selectedPlanet={selectedPlanet}
-          />
-        </Suspense>
+        {activeView === 'exoplanet' ? (
+          <ExoplanetView />
+        ) : (
+          <Suspense fallback={<div>Loading...</div>}>
+            <SolarSystemScene
+              onPlanetSelect={handlePlanetSelect}
+              selectedPlanet={selectedPlanet}
+            />
+          </Suspense>
+        )}
       </main>
       <InfoPanel planetData={planetData} onViewCrossSection={() => setShowCrossSection(true)} />
       <Toolbar
