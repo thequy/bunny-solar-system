@@ -20,14 +20,6 @@ export default function AsteroidBelt() {
     return pos;
   }, []);
 
-  const sizes = useMemo(() => {
-    const s = new Float32Array(150);
-    for (let i = 0; i < 150; i++) {
-      s[i] = 0.1 + Math.random() * 0.15;
-    }
-    return s;
-  }, []);
-
   useFrame((state) => {
     if (particlesRef.current) {
       particlesRef.current.rotation.y += 0.0008;
@@ -40,10 +32,6 @@ export default function AsteroidBelt() {
         <bufferAttribute 
           attach="attributes-position" 
           args={[positions, 3]} 
-        />
-        <bufferAttribute 
-          attach="attributes-size" 
-          args={[sizes, 1]} 
         />
       </bufferGeometry>
       <pointsMaterial 
