@@ -7,6 +7,7 @@ import InfoPanel from '@/components/ui/InfoPanel';
 import Toolbar from '@/components/ui/Toolbar';
 import ComparisonModal from '@/components/ui/ComparisonModal';
 import QuizModal from '@/components/ui/QuizModal';
+import CrossSectionModal from '@/components/ui/CrossSectionModal';
 import { PLANET_DATA } from '@/data/planets';
 import { ViewMode, ToolMode } from '@/types';
 
@@ -22,6 +23,7 @@ export default function SolarSystemApp() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [showComparison, setShowComparison] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
+  const [showCrossSection, setShowCrossSection] = useState(false);
 
   const handleViewChange = useCallback((view: ViewMode) => {
     setActiveView(view);
@@ -57,7 +59,7 @@ export default function SolarSystemApp() {
           />
         </Suspense>
       </main>
-      <InfoPanel planetData={planetData} />
+      <InfoPanel planetData={planetData} onViewCrossSection={() => setShowCrossSection(true)} />
       <Toolbar
         activeTool={activeTool}
         isPlaying={isPlaying}
@@ -71,6 +73,12 @@ export default function SolarSystemApp() {
       <QuizModal
         isOpen={showQuiz}
         onClose={() => setShowQuiz(false)}
+      />
+      <CrossSectionModal
+        isOpen={showCrossSection}
+        onClose={() => setShowCrossSection(false)}
+        planetData={planetData}
+        planetId={selectedPlanet || ''}
       />
     </div>
   );

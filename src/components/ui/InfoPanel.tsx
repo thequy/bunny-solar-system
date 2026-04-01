@@ -4,9 +4,10 @@ import { PlanetData } from '@/types';
 
 interface InfoPanelProps {
   planetData: PlanetData | null;
+  onViewCrossSection?: () => void;
 }
 
-export default function InfoPanel({ planetData }: InfoPanelProps) {
+export default function InfoPanel({ planetData, onViewCrossSection }: InfoPanelProps) {
   if (!planetData) {
     return (
     <aside className="info-panel glass-panel">
@@ -71,6 +72,21 @@ export default function InfoPanel({ planetData }: InfoPanelProps) {
             </div>
           </div>
           <p className="planet-description">{planetData.description.vi}</p>
+          <button 
+            onClick={() => onViewCrossSection?.()}
+            style={{
+              marginTop: '16px',
+              padding: '10px 20px',
+              background: 'rgba(100, 150, 255, 0.3)',
+              border: '1px solid rgba(100, 150, 255, 0.5)',
+              borderRadius: '8px',
+              color: '#fff',
+              cursor: 'pointer',
+              width: '100%'
+            }}
+          >
+            Xem mặt cắt
+          </button>
         </div>
       </div>
       <div className="panel-section">
