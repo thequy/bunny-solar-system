@@ -19,7 +19,7 @@ export default function Toolbar({ activeTool, isPlaying, onToolChange, onPlayTog
   ];
 
   return (
-    <footer className="toolbar">
+    <footer className="toolbar glass-panel">
       {tools.map((tool) => (
         <button
           key={tool.id}

@@ -9,7 +9,7 @@ interface InfoPanelProps {
 export default function InfoPanel({ planetData }: InfoPanelProps) {
   if (!planetData) {
     return (
-      <aside className="info-panel">
+    <aside className="info-panel glass-panel">
         <div className="panel-section">
           <div className="panel-title">Thông tin hành tinh</div>
           <p>Chọn một hành tinh để xem thông tin</p>
