@@ -32,7 +32,7 @@ export default function InfoPanel({ planetData }: InfoPanelProps) {
   const darkColor = (planetData.color * 0.5).toString(16).padStart(6, '0');
 
   return (
-    <aside className="info-panel">
+    <aside className="info-panel glass-panel">
       <div className="panel-section">
         <div className="panel-title">Thông tin hành tinh</div>
         <div className="planet-card">
