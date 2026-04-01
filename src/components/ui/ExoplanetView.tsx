@@ -6,6 +6,7 @@ import { EXOPLANET_DATA } from '@/data/exoplanets';
 export default function ExoplanetView() {
   const [sizeFilter, setSizeFilter] = useState<string>('all');
   const [tempFilter, setTempFilter] = useState<string>('all');
+  const [distanceFilter, setDistanceFilter] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredPlanets = useMemo(() => {
@@ -19,9 +20,12 @@ export default function ExoplanetView() {
       if (tempFilter === 'cold' && planet.temperature >= 0) return false;
       if (tempFilter === 'moderate' && (planet.temperature < 0 || planet.temperature > 100)) return false;
       if (tempFilter === 'hot' && planet.temperature <= 100) return false;
+      if (distanceFilter === 'near' && planet.distance >= 50) return false;
+      if (distanceFilter === 'medium' && (planet.distance < 50 || planet.distance > 500)) return false;
+      if (distanceFilter === 'far' && planet.distance <= 500) return false;
       return true;
     });
-  }, [sizeFilter, tempFilter, searchTerm]);
+  }, [sizeFilter, tempFilter, distanceFilter, searchTerm]);
 
   const getTypeLabel = (type: string) => {
     const labels: Record<string, string> = {
@@ -95,6 +99,23 @@ export default function ExoplanetView() {
           <option value="cold">Lạnh (&lt; 0°C)</option>
           <option value="moderate">Ấm (0-100°C)</option>
           <option value="hot">Nóng (&gt; 100°C)</option>
+        </select>
+
+        <select
+          value={distanceFilter}
+          onChange={(e) => setDistanceFilter(e.target.value)}
+          style={{
+            padding: '10px 16px',
+            borderRadius: '8px',
+            border: '1px solid rgba(100, 150, 255, 0.3)',
+            background: 'rgba(20, 20, 50, 0.8)',
+            color: '#fff'
+          }}
+        >
+          <option value="all">Tất cả khoảng cách</option>
+          <option value="near">Gần (&lt; 50 năm ánh sáng)</option>
+          <option value="medium">Trung bình (50-500)</option>
+          <option value="far">Xa (&gt; 500)</option>
         </select>
       </div>
       
