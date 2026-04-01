@@ -6,6 +6,7 @@ import Header from '@/components/ui/Header';
 import InfoPanel from '@/components/ui/InfoPanel';
 import Toolbar from '@/components/ui/Toolbar';
 import ComparisonModal from '@/components/ui/ComparisonModal';
+import QuizModal from '@/components/ui/QuizModal';
 import { PLANET_DATA } from '@/data/planets';
 import { ViewMode, ToolMode } from '@/types';
 
@@ -20,11 +21,14 @@ export default function SolarSystemApp() {
   const [activeTool, setActiveTool] = useState<ToolMode>('select');
   const [isPlaying, setIsPlaying] = useState(true);
   const [showComparison, setShowComparison] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   const handleViewChange = useCallback((view: ViewMode) => {
     setActiveView(view);
     if (view === 'compare') {
       setShowComparison(true);
+    } else if (view === 'quiz') {
+      setShowQuiz(true);
     }
   }, []);
 
@@ -63,6 +67,10 @@ export default function SolarSystemApp() {
       <ComparisonModal
         isOpen={showComparison}
         onClose={() => setShowComparison(false)}
+      />
+      <QuizModal
+        isOpen={showQuiz}
+        onClose={() => setShowQuiz(false)}
       />
     </div>
   );
