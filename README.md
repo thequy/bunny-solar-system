@@ -27,7 +27,7 @@
 - 🎨 **Logo & Favicon** - Sử dụng logo-02.png làm biểu tượng trang web
 - 🎨 **Sci-Fi UI** - Giao diện glass-morphism hiện đại
 - 🌙 **Mặt Trăng** - Mặt Trăng quay quanh Trái Đất
-- 🪨 **Vành đai tiểu hành tinh** - Giữa Sao Hoả và Sao Thủy
+- 🪨 **Vành đai tiểu hành tinh** - Giữa Sao Hoả và Sao Mộc
 
 ### Quiz Mode
 - ❓ **Quiz** - Mini-game kiểm tra kiến thức về hệ mặt trời (10 câu hỏi, timer, điểm số)

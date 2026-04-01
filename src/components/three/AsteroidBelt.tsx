@@ -11,7 +11,7 @@ export default function AsteroidBelt() {
     const pos = new Float32Array(150 * 3);
     for (let i = 0; i < 150; i++) {
       const angle = (i / 150) * Math.PI * 2;
-      const radius = 18 + Math.random() * 4;
+      const radius = 28 + Math.random() * 4;
       const height = (Math.random() - 0.5) * 1.5;
       pos[i * 3] = Math.cos(angle) * radius;
       pos[i * 3 + 1] = height;
