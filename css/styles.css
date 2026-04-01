@@ -19,18 +19,24 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
-    overflow: hidden;
+    min-height: 100vh;
 }
 
 #app {
     display: grid;
     grid-template-columns: 1fr 320px;
-    grid-template-rows: 60px 1fr 80px;
-    height: 100vh;
+    grid-template-rows: 60px auto 1fr 80px;
+    min-height: 100vh;
 }
 
 /* Header with glass-morphism */
@@ -667,6 +673,11 @@ body {
         grid-template-columns: 1fr;
         grid-template-rows: 60px auto 1fr 80px;
     }
+
+    #canvas-container {
+        min-height: calc(100vh - 290px);
+    }
+
     #info-panel {
         display: none;
     }
@@ -676,6 +687,10 @@ body {
 @media (max-width: 768px) {
     #app {
         grid-template-rows: 56px auto 1fr 72px;
+    }
+
+    #canvas-container {
+        min-height: calc(100vh - 236px);
     }
 
     /* Compact header */
@@ -777,6 +792,10 @@ body {
 @media (max-width: 480px) {
     #app {
         grid-template-rows: 52px auto 1fr 68px;
+    }
+
+    #canvas-container {
+        min-height: calc(100vh - 224px);
     }
 
     /* Smaller logo */
