@@ -34,9 +34,17 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
   const r = parseInt(colorHex.substring(0, 2), 16);
   const g = parseInt(colorHex.substring(2, 4), 16);
   const b = parseInt(colorHex.substring(4, 6), 16);
+  
+  // Brighten by 5%
+  const brightR = Math.min(Math.floor(r * 1.05), 255).toString(16).padStart(2, '0');
+  const brightG = Math.min(Math.floor(g * 1.05), 255).toString(16).padStart(2, '0');
+  const brightB = Math.min(Math.floor(b * 1.05), 255).toString(16).padStart(2, '0');
+  
   const darkR = Math.floor(r * 0.5).toString(16).padStart(2, '0');
   const darkG = Math.floor(g * 0.5).toString(16).padStart(2, '0');
   const darkB = Math.floor(b * 0.5).toString(16).padStart(2, '0');
+  
+  const brightColor = `${brightR}${brightG}${brightB}`;
   const darkColor = `${darkR}${darkG}${darkB}`;
 
   return (
@@ -53,7 +61,7 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
             <div
               className="planet-avatar"
               style={{
-                background: `radial-gradient(circle at 30% 30%, #${colorHex}, #${darkColor})`,
+                background: `radial-gradient(circle at 30% 30%, #${brightColor}, #${darkColor})`,
               }}
             />
             <div>

@@ -42,8 +42,10 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
     }
   });
 
-  const handleClick = () => {
-    onClick(id);
+  const handlePointerDown = (e: any) => {
+    e.stopPropagation();
+    // Trigger click on pointer down
+    if (onClick) onClick(id);
   };
 
   const handlePointerOver = () => {
@@ -74,7 +76,7 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
       </mesh>
       <mesh
         ref={meshRef}
-        onClick={handleClick}
+        onPointerDown={handlePointerDown}
         onPointerOver={handlePointerOver}
         onPointerOut={handlePointerOut}
         position={[Math.cos(initialAngle) * data.distance, 0, Math.sin(initialAngle) * data.distance]}
@@ -111,7 +113,7 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
           position={[Math.cos(initialAngle) * data.distance + orbitRadius, 0, Math.sin(initialAngle) * data.distance]}
           onPointerOver={handleMoonPointerOver}
           onPointerOut={handleMoonPointerOut}
-          onClick={() => onClick('moon')}
+        onClick={() => onClick('moon')}
         >
           <sphereGeometry args={[0.3, 16, 16]} />
           <meshStandardMaterial 

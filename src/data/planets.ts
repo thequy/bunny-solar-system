@@ -31,7 +31,8 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 0.8,
     distance: 10,
     speed: 0.02,
-    features: ["Hành tinh nhỏ nhất", "Không có khí quyển"],
+    hasWater: false,
+    features: ["Hành tinh nhỏ nhất", "Không có khí quyển", "Biên độ nhiệt lớn (-173°C đến 427°C)"],
     description: { 
       vi: "Sao Thủy là hành tinh nhỏ nhất và gần Mặt Trời nhất.",
       en: "Mercury is the smallest planet in the Solar System."
@@ -49,7 +50,8 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 1.2,
     distance: 15,
     speed: 0.015,
-    features: ["Nóng nhất", "Quay ngược"],
+    hasWater: false,
+    features: ["Nóng nhất (464°C)", "Quay ngược (đông sang tây)", "Khí quyển dày CO₂"],
     description: { 
       vi: "Sao Kim là hành tinh nóng nhất trong hệ mặt trời.",
       en: "Venus is the hottest planet in the Solar System."
@@ -67,7 +69,8 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 1.3,
     distance: 20,
     speed: 0.01,
-    features: ["Hành tinh duy nhất có sự sống", "71% bề mặt là nước"],
+    hasWater: true,
+    features: ["Hành tinh duy nhất có sự sống", "71% bề mặt là nước lỏng", "Khí quyển giàu Nitrogen & Oxygen"],
     description: { 
       vi: "Trái Đất là hành tinh thứ ba từ Mặt Trời và là hành tinh duy nhất có sự sống.",
       en: "Earth is the third planet from the Sun and the only planet with life."
@@ -85,7 +88,8 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 0.9,
     distance: 25,
     speed: 0.008,
-    features: ["Hành tinh đỏ", "Có nước đóng băng"],
+    hasWater: true,
+    features: ["Hành tinh đỏ (oxit sắt)", "Có nước đóng băng ở hai cực", "Núi Olympus cao nhất (21km)"],
     description: { 
       vi: "Sao Hỏa được gọi là hành tinh đỏ do oxit sắt trên bề mặt.",
       en: "Mars is known as the Red Planet."
@@ -103,7 +107,8 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 3.5,
     distance: 35,
     speed: 0.004,
-    features: ["Lớn nhất", "Có cơn bão Đỏ"],
+    hasWater: false,
+    features: ["Lớn nhất (11 lần đường kính Trái Đất)", "Cơn bão Đỏ tồn tại 350+ năm", "Ít nhất 95 vệ tinh"],
     description: { 
       vi: "Sao Mộc là hành tinh lớn nhất trong hệ mặt trời.",
       en: "Jupiter is the largest planet in the Solar System."
@@ -121,8 +126,9 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 3.0,
     distance: 45,
     speed: 0.003,
+    hasWater: false,
     hasRings: true,
-    features: ["Có vành đai đẹp", "Nhiều vệ tinh"],
+    features: ["Vành đai đẹp và phức tạp nhất", "Nhiều vệ tinh nhất (146)", "Mật độ thấp hơn nước"],
     description: { 
       vi: "Sao Thổ nổi tiếng với hệ vành đai tuyệt đẹp.",
       en: "Saturn is famous for its beautiful ring system."
@@ -140,7 +146,8 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 2.0,
     distance: 55,
     speed: 0.002,
-    features: ["Quay nghiêng 98 độ", "Màu xanh lục"],
+    hasWater: false,
+    features: ["Quay nghiêng 98 độ (nằm ngang)", "Màu xanh lục do methane", "Ít vệ tinh nhất trong khí khổng lồ"],
     description: { 
       vi: "Sao Thiên Vương là hành tinh duy nhất quay nghiêng.",
       en: "Uranus is the only planet that rotates on its side."
@@ -158,7 +165,8 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 1.9,
     distance: 65,
     speed: 0.001,
-    features: ["Gió mạnh nhất", "Hành tinh xa nhất"],
+    hasWater: false,
+    features: ["Gió mạnh nhất (2.100 km/h)", "Hành tinh xa nhất", "Được phát hiện bằng toán học"],
     description: { 
       vi: "Sao Hải Vương là hành tinh xa nhất từ Mặt Trời.",
       en: "Neptune is the farthest planet from the Sun."
@@ -176,7 +184,8 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 0.3,
     distance: 20,
     speed: 0,
-    features: ["Vệ tinh tự nhiên của Trái Đất", "Người duy nhất đặt chân"],
+    hasWater: true,
+    features: ["Vệ tinh tự nhiên duy nhất của Trái Đất", "Lớn thứ 5 trong hệ mặt trời", "Người duy nhất đặt chân"],
     description: { 
       vi: "Mặt Trăng là vệ tinh tự nhiên duy nhất của Trái Đất và là vệ tinh lớn thứ 5 trong hệ mặt trời.",
       en: "The Moon is Earth's only natural satellite and the fifth largest moon in the Solar System."

@@ -3,6 +3,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Suspense } from 'react';
+import * as THREE from 'three';
 import Stars from './Stars';
 import Sun from './Sun';
 import Planet from './Planet';
@@ -35,9 +36,15 @@ export default function SolarSystemScene({ onPlanetSelect, selectedPlanet }: Sol
         ))}
       </Suspense>
       <OrbitControls
-        enablePan={true}
+        makeDefault
+        enablePan={false}
         enableZoom={true}
         enableRotate={true}
+        mouseButtons={{
+          LEFT: THREE.MOUSE.ROTATE,
+          MIDDLE: THREE.MOUSE.DOLLY,
+          RIGHT: THREE.MOUSE.PAN
+        }}
         minDistance={20}
         maxDistance={150}
       />

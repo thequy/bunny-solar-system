@@ -26,6 +26,7 @@ export default function SolarSystemApp() {
   const [showCrossSection, setShowCrossSection] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showInfoPanel, setShowInfoPanel] = useState(false);
+  const [justSelected, setJustSelected] = useState(false);
 
   useEffect(() => {
     const originalWarn = console.warn;
@@ -49,8 +50,9 @@ export default function SolarSystemApp() {
     }
   }, []);
 
-  const handleToolChange = useCallback((tool: ToolMode) => {
-    setActiveTool(tool);
+  const handleMenuToggle = useCallback(() => {
+    setShowInfoPanel(false);
+    setMenuOpen(prev => !prev);
   }, []);
 
   const handlePlayToggle = useCallback(() => {
@@ -60,7 +62,15 @@ export default function SolarSystemApp() {
   const handlePlanetSelect = useCallback((id: string) => {
     setSelectedPlanet(id);
     setShowInfoPanel(true);
+    setJustSelected(true);
+    setTimeout(() => setJustSelected(false), 300);
   }, []);
+
+  const handleCanvasClick = useCallback(() => {
+    if (!justSelected) {
+      setShowInfoPanel(false);
+    }
+  }, [justSelected]);
 
   const planetData = selectedPlanet ? PLANET_DATA[selectedPlanet] : null;
 
@@ -70,9 +80,9 @@ export default function SolarSystemApp() {
         activeView={activeView} 
         onViewChange={handleViewChange}
         menuOpen={menuOpen}
-        onMenuToggle={() => setMenuOpen(!menuOpen)}
+        onMenuToggle={handleMenuToggle}
       />
-      <main className="canvas-area">
+      <main className="canvas-area" onClick={handleCanvasClick}>
         {activeView === 'exoplanet' ? (
           <ExoplanetView />
         ) : (

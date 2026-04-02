@@ -20,7 +20,8 @@ export default function Sun({ onClick }: SunProps) {
     }
   });
 
-  const handleClick = () => {
+  const handlePointerDown = (e: any) => {
+    e.stopPropagation();
     if (onClick) onClick('sun');
   };
 
@@ -38,7 +39,7 @@ export default function Sun({ onClick }: SunProps) {
     <group>
       <mesh 
         ref={sunRef} 
-        onClick={handleClick}
+        onPointerDown={handlePointerDown}
         onPointerOver={handlePointerOver}
         onPointerOut={handlePointerOut}
       >

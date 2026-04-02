@@ -11,6 +11,7 @@ export interface PlanetData {
   distance: number;
   speed: number;
   hasRings?: boolean;
+  hasWater?: boolean;
   features: string[];
   description: { vi: string; en: string };
 }
