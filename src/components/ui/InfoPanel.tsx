@@ -31,7 +31,13 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
   };
 
   const colorHex = planetData.color.toString(16).padStart(6, '0');
-  const darkColor = (planetData.color * 0.5).toString(16).padStart(6, '0');
+  const r = parseInt(colorHex.substring(0, 2), 16);
+  const g = parseInt(colorHex.substring(2, 4), 16);
+  const b = parseInt(colorHex.substring(4, 6), 16);
+  const darkR = Math.floor(r * 0.5).toString(16).padStart(2, '0');
+  const darkG = Math.floor(g * 0.5).toString(16).padStart(2, '0');
+  const darkB = Math.floor(b * 0.5).toString(16).padStart(2, '0');
+  const darkColor = `${darkR}${darkG}${darkB}`;
 
   return (
     <aside className="info-panel glass-panel">

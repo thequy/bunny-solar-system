@@ -22,10 +22,10 @@ export default function Header({ activeView, onViewChange, menuOpen, onMenuToggl
       <header className="header">
         <div className="logo">
           <img src="/logo-02.png" alt="Logo" className="logo-img" />
-          <span className="logo-text">Solar Explorer</span>
+          <span className="logo-text">Solar Bunny</span>
         </div>
         <button className="menu-toggle" onClick={onMenuToggle}>
-          ☰
+          ⚙️
         </button>
       </header>
       <nav className={`nav ${menuOpen ? 'open' : ''}`}>
@@ -42,9 +42,6 @@ export default function Header({ activeView, onViewChange, menuOpen, onMenuToggl
             {view.icon} {view.label}
           </button>
         ))}
-        <button className="nav-btn settings-btn" onClick={onMenuToggle}>
-          ⚙️ Cài đặt
-        </button>
       </nav>
     </>
   );
