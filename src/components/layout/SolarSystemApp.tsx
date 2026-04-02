@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, Suspense } from 'react';
+import { useState, useCallback, Suspense, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Header from '@/components/ui/Header';
 import InfoPanel from '@/components/ui/InfoPanel';
@@ -27,6 +27,19 @@ export default function SolarSystemApp() {
   const [showCrossSection, setShowCrossSection] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showInfoPanel, setShowInfoPanel] = useState(false);
+
+  useEffect(() => {
+    const originalWarn = console.warn;
+    console.warn = (...args: unknown[]) => {
+      if (args[0] && typeof args[0] === 'string' && args[0].includes('THREE.Clock')) {
+        return;
+      }
+      originalWarn.apply(console, args);
+    };
+    return () => {
+      console.warn = originalWarn;
+    };
+  }, []);
 
   const handleViewChange = useCallback((view: ViewMode) => {
     setActiveView(view);
