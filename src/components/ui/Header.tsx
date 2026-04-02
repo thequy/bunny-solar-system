@@ -39,6 +39,9 @@ export default function Header({ activeView, onViewChange, menuOpen, onMenuToggl
             {view.label}
           </button>
         ))}
+        <button className="nav-btn settings-btn" onClick={onMenuToggle}>
+          ⚙️ Cài đặt
+        </button>
       </nav>
     </header>
   );

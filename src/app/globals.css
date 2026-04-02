@@ -74,39 +74,17 @@ body {
 }
 
 .menu-toggle {
-  display: none;
   background: transparent;
   border: none;
   color: var(--text-primary);
   font-size: 24px;
   cursor: pointer;
   padding: 8px;
+  display: block;
 }
 
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-  
-  .nav {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background: var(--bg-secondary);
-    padding: 16px;
-    gap: 8px;
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 100;
-  }
-  
-  .nav.open {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.nav {
+  position: relative;
 }
 
 .nav-btn {
@@ -284,13 +262,13 @@ body {
 
 .toolbar {
   grid-column: 1 / -1;
-  background: #12122a;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 0 24px;
-  border-top: 1px solid var(--border);
+  padding: 12px 24px;
+  border-top: 1px solid rgba(100, 200, 255, 0.1);
 }
 
 .tool-btn {
@@ -298,7 +276,7 @@ body {
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background: #1a1a3a;
+  background: rgba(20, 20, 50, 0.6);
   border: 1px solid rgba(100, 200, 255, 0.3);
   color: var(--text-secondary);
   border-radius: 8px;
