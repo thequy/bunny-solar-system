@@ -48,7 +48,7 @@ export default function ExoplanetView() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: '20px', height: '100%', display: 'flex', flexDirection: 'column' }}>
       <h2 style={{ marginBottom: '20px', color: '#ffd700' }}>Danh sách Exoplanets ({filteredPlanets.length})</h2>
       
       <div style={{ display: 'flex', gap: '20px', marginBottom: '20px', flexWrap: 'wrap' }}>
@@ -119,7 +119,14 @@ export default function ExoplanetView() {
         </select>
       </div>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
+        gap: '20px',
+        maxHeight: 'calc(100vh - 200px)',
+        overflowY: 'auto',
+        paddingRight: '8px'
+      }}>
         {filteredPlanets.map(planet => (
           <div key={planet.id} style={{ 
             padding: '20px', 

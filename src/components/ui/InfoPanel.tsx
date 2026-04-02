@@ -5,9 +5,10 @@ import { PlanetData } from '@/types';
 interface InfoPanelProps {
   planetData: PlanetData | null;
   onViewCrossSection?: () => void;
+  onClose?: () => void;
 }
 
-export default function InfoPanel({ planetData, onViewCrossSection }: InfoPanelProps) {
+export default function InfoPanel({ planetData, onViewCrossSection, onClose }: InfoPanelProps) {
   if (!planetData) {
     return (
     <aside className="info-panel glass-panel">
@@ -35,7 +36,12 @@ export default function InfoPanel({ planetData, onViewCrossSection }: InfoPanelP
   return (
     <aside className="info-panel glass-panel">
       <div className="panel-section">
-        <div className="panel-title">Thông tin hành tinh</div>
+        <div className="panel-title">
+          Thông tin hành tinh
+          {onClose && (
+            <button className="close-btn" onClick={onClose}>×</button>
+          )}
+        </div>
         <div className="planet-card">
           <div className="planet-header">
             <div

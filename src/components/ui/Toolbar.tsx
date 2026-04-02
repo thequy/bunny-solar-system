@@ -7,9 +7,10 @@ interface ToolbarProps {
   isPlaying: boolean;
   onToolChange: (tool: ToolMode) => void;
   onPlayToggle: () => void;
+  onSettingsClick?: () => void;
 }
 
-export default function Toolbar({ activeTool, isPlaying, onToolChange, onPlayToggle }: ToolbarProps) {
+export default function Toolbar({ activeTool, isPlaying, onToolChange, onPlayToggle, onSettingsClick }: ToolbarProps) {
   const tools: { id: ToolMode; icon: string; label: string }[] = [
     { id: 'select', icon: '👆', label: 'Chọn hành tinh' },
     { id: 'measure', icon: '📏', label: 'Đo khoảng cách' },
@@ -23,10 +24,12 @@ export default function Toolbar({ activeTool, isPlaying, onToolChange, onPlayTog
       {tools.map((tool) => (
         <button
           key={tool.id}
-          className={`tool-btn ${activeTool === tool.id ? 'active' : ''}`}
+          className={`tool-btn neon-border ${activeTool === tool.id ? 'active' : ''}`}
           onClick={() => {
             if (tool.id === 'play') {
               onPlayToggle();
+            } else if (tool.id === 'settings') {
+              onSettingsClick?.();
             } else {
               onToolChange(tool.id);
             }

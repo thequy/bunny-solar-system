@@ -17,3 +17,8 @@ export interface PlanetData {
 
 export type ViewMode = 'solar' | 'exoplanet' | 'compare' | 'quiz';
 export type ToolMode = 'select' | 'measure' | 'zoom' | 'play' | 'settings';
+
+export interface SettingsState {
+  menuOpen: boolean;
+  activePlanetPanel: boolean;
+}

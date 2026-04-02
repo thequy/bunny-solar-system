@@ -25,6 +25,8 @@ export default function SolarSystemApp() {
   const [showComparison, setShowComparison] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
   const [showCrossSection, setShowCrossSection] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showInfoPanel, setShowInfoPanel] = useState(false);
 
   const handleViewChange = useCallback((view: ViewMode) => {
     setActiveView(view);
@@ -45,13 +47,19 @@ export default function SolarSystemApp() {
 
   const handlePlanetSelect = useCallback((id: string) => {
     setSelectedPlanet(id);
+    setShowInfoPanel(true);
   }, []);
 
   const planetData = selectedPlanet ? PLANET_DATA[selectedPlanet] : null;
 
   return (
     <div className="app">
-      <Header activeView={activeView} onViewChange={handleViewChange} />
+      <Header 
+        activeView={activeView} 
+        onViewChange={handleViewChange}
+        menuOpen={menuOpen}
+        onMenuToggle={() => setMenuOpen(!menuOpen)}
+      />
       <main className="canvas-area">
         {activeView === 'exoplanet' ? (
           <ExoplanetView />
@@ -64,12 +72,19 @@ export default function SolarSystemApp() {
           </Suspense>
         )}
       </main>
-      <InfoPanel planetData={planetData} onViewCrossSection={() => setShowCrossSection(true)} />
+      {showInfoPanel && (
+        <InfoPanel 
+          planetData={planetData} 
+          onViewCrossSection={() => setShowCrossSection(true)}
+          onClose={() => setShowInfoPanel(false)}
+        />
+      )}
       <Toolbar
         activeTool={activeTool}
         isPlaying={isPlaying}
         onToolChange={handleToolChange}
         onPlayToggle={handlePlayToggle}
+        onSettingsClick={() => setMenuOpen(true)}
       />
       <ComparisonModal
         isOpen={showComparison}
