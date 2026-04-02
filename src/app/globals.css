@@ -185,7 +185,7 @@ body {
   top: 60px;
   left: 0;
   right: 0;
-  bottom: 60px;
+  bottom: 0;
   background: radial-gradient(ellipse at center, #0d0d20 0%, #050510 100%);
 }
 
@@ -197,7 +197,7 @@ body {
   position: fixed;
   right: 0;
   top: 60px;
-  bottom: 60px;
+  bottom: 0;
   width: 300px;
   max-width: 100%;
   z-index: 50;
@@ -452,9 +452,6 @@ body {
 @media (max-width: 1024px) {
   .app {
     grid-template-columns: 1fr;
-  }
-  .info-panel {
-    display: none;
   }
 }
 
