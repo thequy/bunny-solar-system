@@ -4,7 +4,6 @@ import { useState, useCallback, Suspense, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Header from '@/components/ui/Header';
 import InfoPanel from '@/components/ui/InfoPanel';
-import Toolbar from '@/components/ui/Toolbar';
 import ComparisonModal from '@/components/ui/ComparisonModal';
 import QuizModal from '@/components/ui/QuizModal';
 import CrossSectionModal from '@/components/ui/CrossSectionModal';
@@ -92,13 +91,6 @@ export default function SolarSystemApp() {
           onClose={() => setShowInfoPanel(false)}
         />
       )}
-      <Toolbar
-        activeTool={activeTool}
-        isPlaying={isPlaying}
-        onToolChange={handleToolChange}
-        onPlayToggle={handlePlayToggle}
-        onSettingsClick={() => setMenuOpen(true)}
-      />
       <ComparisonModal
         isOpen={showComparison}
         onClose={() => setShowComparison(false)}
