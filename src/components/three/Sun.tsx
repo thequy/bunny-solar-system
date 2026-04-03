@@ -128,6 +128,57 @@ export default function Sun({ onClick }: SunProps) {
     });
   }, []);
   
+  // Corona streamer shader - dynamic coronal mass ejections
+  const streamerMaterial = useMemo(() => {
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 }
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        varying vec3 vPosition;
+        void main() {
+          vUv = uv;
+          vPosition = position;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        varying vec2 vUv;
+        varying vec3 vPosition;
+        
+        void main() {
+          // Coronal loops - extend from surface into space
+          float angle = atan(vPosition.y, vPosition.x);
+          float height = vPosition.z;
+          
+          // Multiple loop structures
+          float loop1 = sin(angle * 6.0 + time * 0.3) * 0.5 + 0.5;
+          float loop2 = sin(angle * 4.0 - time * 0.2 + 1.57) * 0.5 + 0.5;
+          float loop3 = sin(angle * 8.0 + time * 0.4) * 0.5 + 0.5;
+          
+          // Combine loops based on height
+          float prominence = 0.0;
+          if (height > 4.5) {
+            prominence = loop1 * 0.4 + loop2 * 0.35 + loop3 * 0.25;
+            prominence *= smoothstep(4.5, 7.0, height);
+          }
+          
+          // Hydrogen emission color (red/pink)
+          vec3 promoColor = vec3(1.0, 0.4, 0.2);
+          float alpha = prominence * 0.8;
+          
+          gl_FragColor = vec4(promoColor, alpha);
+        }
+      `,
+      transparent: true,
+      side: THREE.DoubleSide,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+  }, []);
+  
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     if (sunRef.current) {
@@ -136,6 +187,7 @@ export default function Sun({ onClick }: SunProps) {
     coronaMaterial.uniforms.time.value = time;
     chromoMaterial.uniforms.time.value = time;
     photosphereMaterial.uniforms.time.value = time;
+    streamerMaterial.uniforms.time.value = time;
   });
 
   const handlePointerDown = (e: any) => {
@@ -166,6 +218,28 @@ export default function Sun({ onClick }: SunProps) {
         <sphereGeometry args={[5.8, 32, 32]} />
         <meshBasicMaterial color={0xff8800} transparent opacity={0.15} side={THREE.BackSide} />
       </mesh>
+      
+      {/* Solar prominences - coronal loops extending into space */}
+      <mesh>
+        <sphereGeometry args={[6.2, 32, 32]} />
+        <primitive object={streamerMaterial} attach="material" />
+      </mesh>
+      
+      {/* Additional prominence spikes */}
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <mesh 
+          key={i} 
+          position={[
+            Math.cos(i * Math.PI / 3) * 5.5,
+            Math.sin(i * Math.PI / 3) * 0.5,
+            Math.sin(i * Math.PI / 3) * 5.5
+          ]}
+          rotation={[Math.random() * 0.5, i * Math.PI / 3, 0]}
+        >
+          <coneGeometry args={[0.3, 2 + Math.random(), 8]} />
+          <meshBasicMaterial color={0xff4400} transparent opacity={0.4} />
+        </mesh>
+      ))}
       
       {/* CHROMOSPHERE - tầng sắc tố (faculae và pháo sáng) */}
       <mesh>
