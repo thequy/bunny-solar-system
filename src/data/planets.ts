@@ -38,7 +38,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 5.43,
     surfaceArea: 74800000,
     atmosphere: "Rất mỏng (Oxygen, Sodium, Hydrogen)",
-    features: ["Hành tinh nhỏ nhất", "Không có khí quyển", "Biên độ nhiệt lớn (-173°C đến 427°C)"],
+    features: ["Quỹ đạo gần Mặt Trời nhất", "Không có khí quyển đáng kể", "Biên độ nhiệt cực lớn (-173°C đến 427°C)"],
     description: { 
       vi: "Sao Thủy là hành tinh nhỏ nhất và gần Mặt Trời nhất.",
       en: "Mercury is the smallest planet in the Solar System."
@@ -63,7 +63,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 5.24,
     surfaceArea: 460000000,
     atmosphere: "96.5% CO₂, 3.5% Nitrogen",
-    features: ["Nóng nhất (464°C)", "Quay ngược (đông sang tây)", "Khí quyển dày CO₂"],
+    features: ["Nhiệt độ bề mặt cao nhất (464°C)", "Quay ngược chiều (đông→tây)", "Áp suất khí quyển cực lớn (90 atm)"],
     description: { 
       vi: "Sao Kim là hành tinh nóng nhất trong hệ mặt trời.",
       en: "Venus is the hottest planet in the Solar System."
@@ -88,7 +88,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 5.51,
     surfaceArea: 510100000,
     atmosphere: "78% Nitrogen, 21% Oxygen, 1% Argon",
-    features: ["Hành tinh duy nhất có sự sống", "71% bề mặt là nước lỏng", "Khí quyển giàu Nitrogen & Oxygen"],
+    features: ["Hành tinh duy nhất có sự sống", "71% bề mặt là nước lỏng", "Có từ trường bảo vệ"],
     description: { 
       vi: "Trái Đất là hành tinh thứ ba từ Mặt Trời và là hành tinh duy nhất có sự sống.",
       en: "Earth is the third planet from the Sun and the only planet with life."
@@ -138,7 +138,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 1.33,
     surfaceArea: 61420000000,
     atmosphere: "90% Hydrogen, 10% Helium",
-    features: ["Lớn nhất (11 lần đường kính Trái Đất)", "Cơn bão Đỏ tồn tại 350+ năm", "Ít nhất 95 vệ tinh"],
+    features: ["Khối lượng gấp 2.5 lần tất cả hành tinh khác", "Cơn bão Đỏ tồn tại 350+ năm", "95 vệ tinh - nhiều nhất"],
     description: { 
       vi: "Sao Mộc là hành tinh lớn nhất trong hệ mặt trời.",
       en: "Jupiter is the largest planet in the Solar System."

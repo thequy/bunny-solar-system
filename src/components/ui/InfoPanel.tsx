@@ -71,6 +71,9 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
             </div>
           </div>
           
+          {/* Description first */}
+          <p className="planet-description" style={{ marginBottom: '16px' }}>{planetData.description.vi}</p>
+          
           {/* NASA Data Section */}
           <div className="planet-stats">
             <div className="stat-item">
