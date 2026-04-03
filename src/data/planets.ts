@@ -164,7 +164,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 0.687,
     surfaceArea: 42700000000,
     atmosphere: "96% Hydrogen, 3% Helium",
-    features: ["Vành đai đẹp và phức tạp nhất", "Nhiều vệ tinh nhất (146)", "Mật độ thấp hơn nước"],
+    features: ["Mật độ thấp nhất - nổi được trên nước", "Hệ vành đai rộng 282,000 km", "Gió tại xích đạo 1,800 km/h"],
     description: { 
       vi: "Sao Thổ nổi tiếng với hệ vành đai tuyệt đẹp.",
       en: "Saturn is famous for its beautiful ring system."
