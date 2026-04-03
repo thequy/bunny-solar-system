@@ -84,9 +84,9 @@ export default function Planet({ id, data, onClick, isSelected }: PlanetProps) {
         <sphereGeometry args={[data.size, 32, 32]} />
         <meshStandardMaterial
           color={data.color}
-          roughness={0.2}
-          metalness={0.5}
-          emissive={isSelected ? 0x555555 : 0x333333}
+          roughness={0.8}
+          metalness={0.1}
+          emissive={isSelected ? 0x222222 : 0x000000}
         />
         <mesh>
           <sphereGeometry args={[data.size * 1.15, 32, 32]} />

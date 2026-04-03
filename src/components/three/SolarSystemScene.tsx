@@ -20,7 +20,10 @@ export default function SolarSystemScene({ onPlanetSelect, selectedPlanet }: Sol
 
   return (
     <Canvas camera={{ position: [0, 30, 60], fov: 60 }}>
-      <ambientLight intensity={0.7} />
+      {/* Minimal ambient for deep space look */}
+      <ambientLight intensity={0.15} />
+      {/* Point light at sun position - creates day/night effect */}
+      <pointLight position={[0, 0, 0]} intensity={2} distance={150} decay={0.5} />
       <Suspense fallback={null}>
         <Stars />
         <AsteroidBelt />
