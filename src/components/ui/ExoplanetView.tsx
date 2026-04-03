@@ -159,7 +159,7 @@ export default function ExoplanetView() {
           scrollbar-width: none;
           -ms-overflow-style: none;
           padding-right: 8px;
-          padding-bottom: 40px;
+          padding-bottom: 60px;
         }
         .exoplanet-grid::-webkit-scrollbar {
           display: none;
