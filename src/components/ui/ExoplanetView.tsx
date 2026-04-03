@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { EXOPLANET_DATA } from '@/data/exoplanets';
 
 export default function ExoplanetView() {
@@ -8,6 +8,8 @@ export default function ExoplanetView() {
   const [tempFilter, setTempFilter] = useState<string>('all');
   const [distanceFilter, setDistanceFilter] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [visibleCount, setVisibleCount] = useState(12);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const filteredPlanets = useMemo(() => {
     return EXOPLANET_DATA.filter(planet => {
@@ -26,6 +28,32 @@ export default function ExoplanetView() {
       return true;
     });
   }, [sizeFilter, tempFilter, distanceFilter, searchTerm]);
+
+  // Reset visible count when filters change
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [sizeFilter, tempFilter, distanceFilter, searchTerm]);
+
+  // Intersection Observer for lazy loading
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleCount((prev) => Math.min(prev + 8, filteredPlanets.length));
+          }
+        });
+      },
+      { rootMargin: '100px' }
+    );
+
+    const sentinel = document.getElementById('scroll-sentinel');
+    if (sentinel) {
+      observer.observe(sentinel);
+    }
+
+    return () => observer.disconnect();
+  }, [filteredPlanets.length]);
 
   const getTypeLabel = (type: string) => {
     const labels: Record<string, string> = {
@@ -46,6 +74,8 @@ export default function ExoplanetView() {
     };
     return colors[type] || '#ccc';
   };
+
+  const visiblePlanets = filteredPlanets.slice(0, visibleCount);
 
   return (
     <div style={{ padding: '20px', height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -119,37 +149,46 @@ export default function ExoplanetView() {
         </select>
       </div>
       
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-        gap: '20px',
-        paddingRight: '8px',
-        overflowY: 'auto',
-        flex: 1
-      }}>
-        {filteredPlanets.map((planet, index) => (
+      <style jsx>{`
+        .exoplanet-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 20px;
+          flex: 1;
+          overflow-y: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          padding-right: 8px;
+        }
+        .exoplanet-grid::-webkit-scrollbar {
+          display: none;
+        }
+        @keyframes fadeSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .exoplanet-card {
+          padding: 20px;
+          background: rgba(30, 30, 60, 0.8);
+          border-radius: 12px;
+          border: 1px solid rgba(100, 150, 255, 0.2);
+          animation: fadeSlideIn 0.5s ease-out both;
+        }
+      `}</style>
+      
+      <div className="exoplanet-grid" ref={containerRef}>
+        {visiblePlanets.map((planet, index) => (
           <div 
             key={planet.id} 
-            style={{ 
-              padding: '20px', 
-              background: 'rgba(30, 30, 60, 0.8)', 
-              borderRadius: '12px',
-              border: '1px solid rgba(100, 150, 255, 0.2)',
-              animation: `fadeSlideIn 0.5s ease-out ${index * 0.05}s both`
-            }}
+            className="exoplanet-card"
+            style={{ animationDelay: `${(index % 12) * 0.05}s` }}
           >
-            <style jsx>{`
-              @keyframes fadeSlideIn {
-                from {
-                  opacity: 0;
-                  transform: translateY(20px);
-                }
-                to {
-                  opacity: 1;
-                  transform: translateY(0);
-                }
-              }
-            `}</style>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
               <div style={{
                 width: '40px',
@@ -186,6 +225,8 @@ export default function ExoplanetView() {
             </div>
           </div>
         ))}
+        {/* Sentinel for intersection observer */}
+        <div id="scroll-sentinel" style={{ gridColumn: '1 / -1', height: '1px' }} />
       </div>
     </div>
   );
