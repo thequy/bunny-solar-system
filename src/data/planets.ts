@@ -190,5 +190,62 @@ export const PLANET_DATA: Record<string, PlanetData> = {
       vi: "Mặt Trăng là vệ tinh tự nhiên duy nhất của Trái Đất và là vệ tinh lớn thứ 5 trong hệ mặt trời.",
       en: "The Moon is Earth's only natural satellite and the fifth largest moon in the Solar System."
     }
+  },
+  pluto: {
+    name: { vi: "Sao Diêm Vương", en: "Pluto" },
+    type: "dwarf",
+    diameter: 2377,
+    temperature: -230,
+    distanceFromSun: 5900,
+    orbitalPeriod: 90560,
+    moons: 5,
+    color: 0xd4a574,
+    size: 0.4,
+    distance: 75,
+    speed: 0.0008,
+    hasWater: true,
+    features: ["Hành tinh lùn lớn nhất", "Trái tim băng (Sputnik Planitia)", "Có 5 vệ tinh"],
+    description: { 
+      vi: "Sao Diêm Vương là hành tinh lùn lớn nhất trong Vành đai Kuiper, từng được xem là hành tinh thứ 9.",
+      en: "Pluto is the largest dwarf planet in the Kuiper Belt, formerly the ninth planet."
+    }
+  },
+  haumea: {
+    name: { vi: "Haumea", en: "Haumea" },
+    type: "dwarf",
+    diameter: 1632,
+    temperature: -240,
+    distanceFromSun: 6480,
+    orbitalPeriod: 103774,
+    moons: 2,
+    color: 0xe8dcd0,
+    size: 0.35,
+    distance: 80,
+    speed: 0.0007,
+    hasWater: false,
+    features: ["Hình dạng ellipsoid do tự quay nhanh", "Có 2 vệ tinh", "Bề mặt đá và băng"],
+    description: { 
+      vi: "Haumea là hành tinh lùn có hình dạng ellipsoid do tự quay rất nhanh (4 giờ).",
+      en: "Haumea is a dwarf planet with an elongated shape due to its rapid 4-hour rotation."
+    }
+  },
+  makemake: {
+    name: { vi: "Makemake", en: "Makemake" },
+    type: "dwarf",
+    diameter: 1434,
+    temperature: -243,
+    distanceFromSun: 6850,
+    orbitalPeriod: 111845,
+    moons: 1,
+    color: 0xd4a574,
+    size: 0.3,
+    distance: 85,
+    speed: 0.0006,
+    hasWater: false,
+    features: ["Hành tinh lùn lớn thứ 3", "Bề mặt đỏ như Sao Hỏa", "Có 1 vệ tinh"],
+    description: { 
+      vi: "Makemake là hành tinh lùn lớn thứ 3, có bề mặt màu đỏ tương tự Sao Hỏa.",
+      en: "Makemake is the third largest dwarf planet with a reddish surface similar to Mars."
+    }
   }
 };

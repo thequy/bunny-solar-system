@@ -1,6 +1,6 @@
 export interface PlanetData {
   name: { vi: string; en: string };
-  type: 'star' | 'rocky' | 'gas_giant' | 'ice_giant' | 'satellite';
+  type: 'star' | 'rocky' | 'gas_giant' | 'ice_giant' | 'satellite' | 'dwarf';
   diameter: number;
   temperature: number;
   distanceFromSun: number;

@@ -8,6 +8,7 @@ import Stars from './Stars';
 import Sun from './Sun';
 import Planet from './Planet';
 import AsteroidBelt from './AsteroidBelt';
+import KuiperBelt from './KuiperBelt';
 import { PLANET_DATA } from '@/data/planets';
 
 interface SolarSystemSceneProps {
@@ -17,6 +18,7 @@ interface SolarSystemSceneProps {
 
 export default function SolarSystemScene({ onPlanetSelect, selectedPlanet }: SolarSystemSceneProps) {
   const planetIds = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
+  const dwarfPlanetIds = ['pluto', 'haumea', 'makemake'];
 
   return (
     <Canvas camera={{ position: [0, 30, 60], fov: 60 }}>
@@ -27,8 +29,18 @@ export default function SolarSystemScene({ onPlanetSelect, selectedPlanet }: Sol
       <Suspense fallback={null}>
         <Stars />
         <AsteroidBelt />
+        <KuiperBelt />
         <Sun onClick={onPlanetSelect} />
         {planetIds.map((id) => (
+          <Planet
+            key={id}
+            id={id}
+            data={PLANET_DATA[id]}
+            onClick={onPlanetSelect}
+            isSelected={selectedPlanet === id}
+          />
+        ))}
+        {dwarfPlanetIds.map((id) => (
           <Planet
             key={id}
             id={id}
