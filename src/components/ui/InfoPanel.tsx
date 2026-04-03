@@ -137,8 +137,6 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
             </div>
           )}
           
-          <p className="planet-description" style={{ marginTop: '16px' }}>{planetData.description.vi}</p>
-          
           {planetData.features && planetData.features.length > 0 && (
             <div style={{ marginTop: '12px' }}>
               <div className="stat-label" style={{ marginBottom: '8px' }}>Đặc điểm nổi bật</div>
