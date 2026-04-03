@@ -123,17 +123,31 @@ export default function ExoplanetView() {
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
         gap: '20px',
-        maxHeight: 'calc(100vh - 200px)',
-        overflowY: 'auto',
         paddingRight: '8px'
       }}>
-        {filteredPlanets.map(planet => (
-          <div key={planet.id} style={{ 
-            padding: '20px', 
-            background: 'rgba(30, 30, 60, 0.8)', 
-            borderRadius: '12px',
-            border: '1px solid rgba(100, 150, 255, 0.2)'
-          }}>
+        {filteredPlanets.map((planet, index) => (
+          <div 
+            key={planet.id} 
+            style={{ 
+              padding: '20px', 
+              background: 'rgba(30, 30, 60, 0.8)', 
+              borderRadius: '12px',
+              border: '1px solid rgba(100, 150, 255, 0.2)',
+              animation: `fadeSlideIn 0.5s ease-out ${index * 0.05}s both`
+            }}
+          >
+            <style jsx>{`
+              @keyframes fadeSlideIn {
+                from {
+                  opacity: 0;
+                  transform: translateY(20px);
+                }
+                to {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
+            `}</style>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
               <div style={{
                 width: '40px',
