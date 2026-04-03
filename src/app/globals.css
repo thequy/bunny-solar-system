@@ -192,12 +192,13 @@ body {
 .info-panel {
   background: var(--bg-secondary);
   border-left: 1px solid var(--border);
-  padding: 20px;
+  padding: 20px 20px 20px 20px;
+  padding-right: 20px;
   overflow-y: auto;
   position: fixed;
   right: 0;
   top: 80px;
-  bottom: 0;
+  bottom: 20px;
   width: 384px;
   max-width: 100%;
   z-index: 250;
