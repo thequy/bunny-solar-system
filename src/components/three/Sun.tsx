@@ -99,28 +99,79 @@ export default function Sun({ onClick }: SunProps) {
       },
       vertexShader: `
         varying vec2 vUv;
+        varying vec3 vPosition;
         void main() {
           vUv = uv;
+          vPosition = position;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
         uniform float time;
         varying vec2 vUv;
+        varying vec3 vPosition;
         
-        float noise(vec2 p) {
-          return fract(sin(dot(p, vec2(12.9898,78.233))) * 43758.5453);
+        float hash(float n) { return fract(sin(n) * 43758.5453); }
+        
+        // Sunspot positions based on typical solar cycle patterns
+        vec2 spotPositions[6];
+        float spotSizes[6];
+        
+        void initSpots() {
+          // Mid-latitude sunspot groups - realistic distribution
+          spotPositions[0] = vec2(0.25, 0.35);
+          spotSizes[0] = 0.08;
+          spotPositions[1] = vec2(0.28, 0.32);
+          spotSizes[1] = 0.05;
+          
+          spotPositions[2] = vec2(0.65, 0.60);
+          spotSizes[2] = 0.12;
+          spotPositions[3] = vec2(0.68, 0.55);
+          spotSizes[3] = 0.07;
+          
+          spotPositions[4] = vec2(0.45, 0.25);
+          spotSizes[4] = 0.06;
+          spotPositions[5] = vec2(0.82, 0.75);
+          spotSizes[5] = 0.09;
         }
         
         void main() {
-          vec2 uv = vUv * 30.0;
-          float grain = noise(uv + time * 0.1);
-          float spot1 = smoothstep(0.4, 0.35, distance(vUv, vec2(0.3, 0.4)));
-          float spot2 = smoothstep(0.3, 0.25, distance(vUv, vec2(0.7, 0.6)));
-          float spots = max(spot1, spot2) * 0.6;
-          vec3 baseColor = vec3(1.0, 0.9, 0.2);
-          baseColor += (grain - 0.5) * 0.15;
-          baseColor = mix(baseColor, vec3(0.2, 0.1, 0.0), spots);
+          initSpots();
+          
+          // Granulation - solar surface texture
+          vec2 uv = vUv * 40.0;
+          float grain = hash(floor(uv.x) + floor(uv.y) * 100.0) * 0.3;
+          
+          // Base photosphere color - yellow
+          vec3 baseColor = vec3(1.0, 0.92, 0.3);
+          baseColor += grain * 0.12;
+          
+          // Sunspots - dark regions (4000°C vs 5500°C)
+          float totalDarkening = 0.0;
+          
+          for (int i = 0; i < 6; i++) {
+            vec2 spotPos = spotPositions[i];
+            float spotSize = spotSizes[i];
+            
+            // Distance from spot center
+            float dist = distance(vUv, spotPos);
+            
+            // Umbra - dark center (~4000°C)
+            float umbra = smoothstep(spotSize * 0.5, 0.0, dist);
+            
+            // Penumbra - lighter ring around umbra
+            float penumbra = smoothstep(spotSize * 1.2, spotSize * 0.5, dist);
+            penumbra = max(0.0, penumbra - umbra) * 0.4;
+            
+            totalDarkening += umbra * 0.85 + penumbra;
+          }
+          
+          totalDarkening = min(totalDarkening, 1.0);
+          
+          // Apply darkening - umbra very dark, penumbra slightly darker
+          vec3 umbraColor = vec3(0.08, 0.05, 0.02);
+          baseColor = mix(baseColor, umbraColor, totalDarkening);
+          
           gl_FragColor = vec4(baseColor, 1.0);
         }
       `,
