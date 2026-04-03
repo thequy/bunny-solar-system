@@ -14,6 +14,13 @@ export interface PlanetData {
   hasWater?: boolean;
   features: string[];
   description: { vi: string; en: string };
+  // Additional NASA data
+  gravity?: number; // m/s²
+  escapeVelocity?: number; // km/s
+  rotationPeriod?: number; // hours
+  density?: number; // g/cm³
+  surfaceArea?: number; // km²
+  atmosphere?: string; // composition
 }
 
 export type ViewMode = 'solar' | 'exoplanet' | 'compare' | 'quiz';

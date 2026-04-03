@@ -37,7 +37,6 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
   const g = parseInt(colorHex.substring(2, 4), 16);
   const b = parseInt(colorHex.substring(4, 6), 16);
   
-  // Brighten by 5%
   const brightR = Math.min(Math.floor(r * 1.05), 255).toString(16).padStart(2, '0');
   const brightG = Math.min(Math.floor(g * 1.05), 255).toString(16).padStart(2, '0');
   const brightB = Math.min(Math.floor(b * 1.05), 255).toString(16).padStart(2, '0');
@@ -71,16 +70,14 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
               <div className="planet-type">{getTypeLabel(planetData.type)}</div>
             </div>
           </div>
+          
+          {/* NASA Data Section */}
           <div className="planet-stats">
             <div className="stat-item">
               <div className="stat-label">Đường kính</div>
               <div className="stat-value">
                 {planetData.diameter.toLocaleString()} <span className="stat-unit">km</span>
               </div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-label">Nhiệt độ bề mặt</div>
-              <div className="stat-value">{planetData.temperature}°C</div>
             </div>
             <div className="stat-item">
               <div className="stat-label">Khoảng cách từ Mặt Trời</div>
@@ -93,23 +90,52 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
               <div className="stat-value">{planetData.orbitalPeriod.toLocaleString()} ngày</div>
             </div>
             <div className="stat-item">
-              <div className="stat-label">Số vệ tinh</div>
-              <div className="stat-value">{planetData.moons}</div>
+              <div className="stat-label">Thời gian tự quay</div>
+              <div className="stat-value">
+                {planetData.rotationPeriod 
+                  ? (planetData.rotationPeriod < 0 
+                      ? `${Math.abs(planetData.rotationPeriod).toFixed(1)}h (ngược)'` 
+                      : `${planetData.rotationPeriod}h`)
+                  : '-'}
+              </div>
             </div>
-            {planetData.hasWater !== undefined && (
-              <div className="stat-item">
-                <div className="stat-label">Có nước</div>
-                <div className="stat-value">{planetData.hasWater ? 'Có' : 'Không'}</div>
+            <div className="stat-item">
+              <div className="stat-label">Lực hấp dẫn</div>
+              <div className="stat-value">
+                {planetData.gravity ? `${planetData.gravity} m/s²` : '-'}
               </div>
-            )}
-            {planetData.hasRings && (
-              <div className="stat-item">
-                <div className="stat-label">Vành đai</div>
-                <div className="stat-value">Có</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-label">Vận tốc thoát</div>
+              <div className="stat-value">
+                {planetData.escapeVelocity ? `${planetData.escapeVelocity} km/s` : '-'}
               </div>
-            )}
+            </div>
+            <div className="stat-item">
+              <div className="stat-label">Mật độ</div>
+              <div className="stat-value">
+                {planetData.density ? `${planetData.density} g/cm³` : '-'}
+              </div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-label">Diện tích bề mặt</div>
+              <div className="stat-value">
+                {planetData.surfaceArea 
+                  ? `${(planetData.surfaceArea / 1000000).toLocaleString()} triệu km²` 
+                  : '-'}
+              </div>
+            </div>
           </div>
-          <p className="planet-description">{planetData.description.vi}</p>
+          
+          {planetData.atmosphere && (
+            <div style={{ marginTop: '12px' }}>
+              <div className="stat-label" style={{ marginBottom: '6px' }}>Thành phần khí quyển</div>
+              <div style={{ fontSize: '13px', color: '#ccc' }}>{planetData.atmosphere}</div>
+            </div>
+          )}
+          
+          <p className="planet-description" style={{ marginTop: '16px' }}>{planetData.description.vi}</p>
+          
           {planetData.features && planetData.features.length > 0 && (
             <div style={{ marginTop: '12px' }}>
               <div className="stat-label" style={{ marginBottom: '8px' }}>Đặc điểm nổi bật</div>
@@ -120,21 +146,24 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
               </ul>
             </div>
           )}
-          <button 
-            onClick={() => onViewCrossSection?.()}
-            style={{
-              marginTop: '16px',
-              padding: '10px 20px',
-              background: 'rgba(100, 150, 255, 0.3)',
-              border: '1px solid rgba(100, 150, 255, 0.5)',
-              borderRadius: '8px',
-              color: '#fff',
-              cursor: 'pointer',
-              width: '100%'
-            }}
-          >
-            Xem mặt cắt
-          </button>
+          
+          {planetData.type !== 'star' && planetData.type !== 'satellite' && (
+            <button 
+              onClick={() => onViewCrossSection?.()}
+              style={{
+                marginTop: '16px',
+                padding: '10px 20px',
+                background: 'rgba(100, 150, 255, 0.3)',
+                border: '1px solid rgba(100, 150, 255, 0.5)',
+                borderRadius: '8px',
+                color: '#fff',
+                cursor: 'pointer',
+                width: '100%'
+              }}
+            >
+              Xem mặt cắt
+            </button>
+          )}
         </div>
       </div>
     </aside>
