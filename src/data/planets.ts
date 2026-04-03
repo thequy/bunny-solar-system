@@ -13,7 +13,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     size: 4,
     distance: 0,
     speed: 0,
-    features: ["Ngôi sao trung tâm hệ mặt trời", "Chiếm 99.86% khối lượng hệ mặt trời"],
+    features: ["Nhiệt độ lõi ~15 triệu°C", "Nguồn sáng và năng lượng của hệ mặt trời", "Phản ứng tổng hợp hạt nhân"],
     description: { 
       vi: "Mặt Trời là ngôi sao trung tâm của hệ mặt trời, chiếm khoảng 99.86% tổng khối lượng của hệ.",
       en: "The Sun is the star at the center of the Solar System."
@@ -38,7 +38,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 5.43,
     surfaceArea: 74800000,
     atmosphere: "Rất mỏng (Oxygen, Sodium, Hydrogen)",
-    features: ["Quỹ đạo gần Mặt Trời nhất", "Không có khí quyển đáng kể", "Biên độ nhiệt cực lớn (-173°C đến 427°C)"],
+    features: ["Quỹ đạo gần Mặt Trời nhất", "Bề mặt gồ ghề với nhiều hố va chạm", "Không có vệ tinh tự nhiên"],
     description: { 
       vi: "Sao Thủy là hành tinh nhỏ nhất và gần Mặt Trời nhất.",
       en: "Mercury is the smallest planet in the Solar System."
@@ -88,7 +88,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 5.51,
     surfaceArea: 510100000,
     atmosphere: "78% Nitrogen, 21% Oxygen, 1% Argon",
-    features: ["Hành tinh duy nhất có sự sống", "71% bề mặt là nước lỏng", "Có từ trường bảo vệ"],
+    features: ["Hành tinh đá densing nhất (5.51 g/cm³)", "Có từ trường bảo vệ khỏi bức xạ", "Đại dương chiếm 71% bề mặt"],
     description: { 
       vi: "Trái Đất là hành tinh thứ ba từ Mặt Trời và là hành tinh duy nhất có sự sống.",
       en: "Earth is the third planet from the Sun and the only planet with life."
@@ -189,7 +189,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 1.27,
     surfaceArea: 8113000000,
     atmosphere: "83% Hydrogen, 15% Helium, 2% Methane",
-    features: ["Quay nghiêng 98 độ (nằm ngang)", "Màu xanh lục do methane", "Ít vệ tinh nhất trong khí khổng lồ"],
+    features: ["Trục nghiêng 98° - quay nằm ngang", "Nhiệt độ lạnh nhất (-195°C)", "Có 27 vệ tinh tự nhiên"],
     description: { 
       vi: "Sao Thiên Vương là hành tinh duy nhất quay nghiêng.",
       en: "Uranus is the only planet that rotates on its side."
@@ -214,7 +214,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     density: 1.64,
     surfaceArea: 7615000000,
     atmosphere: "80% Hydrogen, 19% Helium, 1% Methane",
-    features: ["Gió mạnh nhất (2.100 km/h)", "Hành tinh xa nhất", "Được phát hiện bằng toán học"],
+    features: ["Tốc độ gió cao nhất (2.100 km/h)", "Chu kỳ quỹ đạo dài nhất (165 năm)", "13 vệ tinh đã biết"],
     description: { 
       vi: "Sao Hải Vương là hành tinh xa nhất từ Mặt Trời.",
       en: "Neptune is the farthest planet from the Sun."
@@ -233,7 +233,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     distance: 20,
     speed: 0,
     hasWater: true,
-    features: ["Vệ tinh tự nhiên duy nhất của Trái Đất", "Lớn thứ 5 trong hệ mặt trời", "Người duy nhất đặt chân"],
+    features: ["Bề mặt đầy hang động và núi lửa cổ", "Không có khí quyển", "Chu kỳ đồng bộ - luôn hướng về Trái Đất"],
     description: { 
       vi: "Mặt Trăng là vệ tinh tự nhiên duy nhất của Trái Đất và là vệ tinh lớn thứ 5 trong hệ mặt trời.",
       en: "The Moon is Earth's only natural satellite and the fifth largest moon in the Solar System."
@@ -252,7 +252,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     distance: 75,
     speed: 0.0008,
     hasWater: true,
-    features: ["Hành tinh lùn lớn nhất", "Trái tim băng (Sputnik Planitia)", "Có 5 vệ tinh"],
+    features: ["Nằm trong Vành đai Kuiper", "Bề mặt phủ nitơ và methane đóng băng", "Vệ tinh Charon - khóa thủy triều"],
     description: { 
       vi: "Sao Diêm Vương là hành tinh lùn lớn nhất trong Vành đai Kuiper, từng được xem là hành tinh thứ 9.",
       en: "Pluto is the largest dwarf planet in the Kuiper Belt, formerly the ninth planet."
@@ -271,7 +271,7 @@ export const PLANET_DATA: Record<string, PlanetData> = {
     distance: 80,
     speed: 0.0007,
     hasWater: false,
-    features: ["Hình dạng ellipsoid do tự quay nhanh", "Có 2 vệ tinh", "Bề mặt đá và băng"],
+    features: ["Tự quay nhanh nhất - 4 giờ/1 vòng", "Hình dạng ellipsoid do lực ly tâm", "Bề mặt đá lạnh không có khí quyển"],
     description: { 
       vi: "Haumea là hành tinh lùn có hình dạng ellipsoid do tự quay rất nhanh (4 giờ).",
       en: "Haumea is a dwarf planet with an elongated shape due to its rapid 4-hour rotation."
