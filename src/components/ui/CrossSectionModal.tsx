@@ -40,24 +40,24 @@ const CROSS_SECTION_DATA: Record<string, PlanetLayer[]> = {
     { name: "Lõi sắt", color: "#CD853F", percentage: 45, thickness: "Radii ~1.700-1.800 km", desc: "Sắt-niken với lưu huỳnh, có thể lỏng một phần" }
   ],
   jupiter: [
-    { name: "Khí quyển", color: "#D9A86A", percentage: 20, thickness: "~1.000 km", desc: "Hydrogen & helium với các dải mây màu" },
-    { name: "Mantel Hydro kim loại", color: "#B8860B", percentage: 50, thickness: "~40.000-50.000 km", desc: "Hydrogen ở áp suất cực cao, dẫn điện tạo từ trường mạnh" },
-    { name: "Lõi đá/băng", color: "#8B4513", percentage: 30, thickness: "Radii ~15.000-25.000 km", desc: "Hỗn hợp đá, kim loại và băng, nặng gấp Trái Đất" }
+    { name: "Khí quyển", color: "#FFE4B5", percentage: 70, thickness: "~1.000 km", desc: "Hydrogen & helium với các dải mây màu nhạt" },
+    { name: "Mantel Hydro kim loại", color: "#CD853F", percentage: 25, thickness: "~40.000-50.000 km", desc: "Hydrogen ở áp suất cực cao, dẫn điện tạo từ trường mạnh" },
+    { name: "Lõi đá/băng", color: "#5D3A1A", percentage: 5, thickness: "Radii ~15.000-25.000 km", desc: "Hỗn hợp đá, kim loại và băng, nặng gấp Trái Đất" }
   ],
   saturn: [
-    { name: "Khí quyển", color: "#E6D98A", percentage: 20, thickness: "~1.000 km", desc: "Hydrogen & helium với các dải mây vàng nhạt" },
-    { name: "Mantel Hydro kim loại", color: "#DAA520", percentage: 50, thickness: "~38.000-47.000 km", desc: "Hydrogen lỏng dẫn điện tạo từ trường mạnh" },
-    { name: "Lõi đá/băng", color: "#8B4513", percentage: 30, thickness: "Radii ~16.000-24.000 km", desc: "Hỗn hợp đá, băng và kim loại" }
+    { name: "Khí quyển", color: "#FFFACD", percentage: 70, thickness: "~1.000 km", desc: "Hydrogen & helium với các dải mây vàng nhạt" },
+    { name: "Mantel Hydro kim loại", color: "#D2691E", percentage: 25, thickness: "~38.000-47.000 km", desc: "Hydrogen lỏng dẫn điện tạo từ trường mạnh" },
+    { name: "Lõi đá/băng", color: "#8B4513", percentage: 5, thickness: "Radii ~16.000-24.000 km", desc: "Hỗn hợp đá, băng và kim loại" }
   ],
   uranus: [
-    { name: "Khí quyển", color: "#8AD9D9", percentage: 20, thickness: "~500 km", desc: "Hydrogen, helium và methane tạo màu xanh lục" },
-    { name: "Mantel băng", color: "#5F9EA0", percentage: 55, thickness: "~8.000-10.000 km", desc: "Nước, ammonia và methane ở trạng thái siêu tới hạn (ice giant)" },
-    { name: "Lõi đá", color: "#4682B4", percentage: 25, thickness: "Radii ~7.000-10.000 km", desc: "Đá và băng silicate" }
+    { name: "Khí quyển", color: "#E0FFFF", percentage: 70, thickness: "~500 km", desc: "Hydrogen, helium và methane tạo màu xanh lục nhạt" },
+    { name: "Mantel băng", color: "#48D1CC", percentage: 25, thickness: "~8.000-10.000 km", desc: "Nước, ammonia và methane ở trạng thái siêu tới hạn (ice giant)" },
+    { name: "Lõi đá", color: "#2F4F4F", percentage: 5, thickness: "Radii ~7.000-10.000 km", desc: "Đá và băng silicate" }
   ],
   neptune: [
-    { name: "Khí quyển", color: "#4A6AD9", percentage: 20, thickness: "~500 km", desc: "Hydrogen, helium và methane tạo màu xanh đậm" },
-    { name: "Mantel băng", color: "#4169E1", percentage: 55, thickness: "~8.000-10.000 km", desc: "Nước, ammonia và methane siêu tới hạn, gió mạnh nhất hệ mặt trời" },
-    { name: "Lõi đá", color: "#1E90FF", percentage: 25, thickness: "Radii ~7.000-10.000 km", desc: "Đá và băng silicate" }
+    { name: "Khí quyển", color: "#B0C4DE", percentage: 70, thickness: "~500 km", desc: "Hydrogen, helium và methane tạo màu xanh đậm" },
+    { name: "Mantel băng", color: "#4169E1", percentage: 25, thickness: "~8.000-10.000 km", desc: "Nước, ammonia và methane siêu tới hạn, gió mạnh nhất hệ mặt trời" },
+    { name: "Lõi đá", color: "#191970", percentage: 5, thickness: "Radii ~7.000-10.000 km", desc: "Đá và băng silicate" }
   ]
 };
 
@@ -106,15 +106,16 @@ export default function CrossSectionModal({ isOpen, onClose, planetData, planetI
                     height: `${radius * 2}px`,
                     borderRadius: '50%',
                     background: layer.color,
-                    boxShadow: `inset 0 0 20px rgba(0,0,0,0.3)`
+                    boxShadow: `inset 0 0 20px rgba(0,0,0,0.3)`,
+                    zIndex: index
                   }}
                 />
               );
-            }).reverse()}
+            })}
           </div>
           <div style={{ flex: 1 }}>
             <h3 style={{ marginBottom: '20px' }}>Cấu trúc bên trong</h3>
-            {layers.map((layer, index) => (
+            {[...layers].reverse().map((layer, index) => (
               <div key={layer.name} style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
