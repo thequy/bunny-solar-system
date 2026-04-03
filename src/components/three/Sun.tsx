@@ -240,22 +240,6 @@ export default function Sun({ onClick }: SunProps) {
         <primitive object={prominenceMaterial} attach="material" />
       </mesh>
       
-      {/* Additional prominence spikes */}
-      {[0, 1, 2, 3, 4, 5].map((i) => (
-        <mesh 
-          key={i} 
-          position={[
-            Math.cos(i * Math.PI / 3) * 5.5,
-            Math.sin(i * Math.PI / 3) * 0.5,
-            Math.sin(i * Math.PI / 3) * 5.5
-          ]}
-          rotation={[Math.random() * 0.5, i * Math.PI / 3, 0]}
-        >
-          <coneGeometry args={[0.3, 2 + Math.random(), 8]} />
-          <meshBasicMaterial color={0xff4400} transparent opacity={0.4} />
-        </mesh>
-      ))}
-      
       {/* CHROMOSPHERE - tầng sắc tố (faculae và pháo sáng) */}
       <mesh>
         <sphereGeometry args={[4.5, 64, 64]} />
