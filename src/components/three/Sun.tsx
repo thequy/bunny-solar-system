@@ -128,8 +128,8 @@ export default function Sun({ onClick }: SunProps) {
     });
   }, []);
   
-  // Corona streamer shader - dynamic coronal mass ejections
-  const streamerMaterial = useMemo(() => {
+  // Solar prominence shader - cool dense plasma loops anchored to photosphere
+  const prominenceMaterial = useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 }
@@ -137,9 +137,11 @@ export default function Sun({ onClick }: SunProps) {
       vertexShader: `
         varying vec2 vUv;
         varying vec3 vPosition;
+        varying float vHeight;
         void main() {
           vUv = uv;
           vPosition = position;
+          vHeight = length(position) - 4.0; // height above photosphere
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
@@ -147,29 +149,42 @@ export default function Sun({ onClick }: SunProps) {
         uniform float time;
         varying vec2 vUv;
         varying vec3 vPosition;
+        varying float vHeight;
+        
+        float hash(float n) { return fract(sin(n) * 43758.5453); }
         
         void main() {
-          // Coronal loops - extend from surface into space
+          // Prominence loops - anchored at photosphere, extending into corona
           float angle = atan(vPosition.y, vPosition.x);
-          float height = vPosition.z;
           
-          // Multiple loop structures
-          float loop1 = sin(angle * 6.0 + time * 0.3) * 0.5 + 0.5;
-          float loop2 = sin(angle * 4.0 - time * 0.2 + 1.57) * 0.5 + 0.5;
-          float loop3 = sin(angle * 8.0 + time * 0.4) * 0.5 + 0.5;
+          // Multiple magnetic loop structures
+          float loopPhase = angle * 3.0 + time * 0.15;
           
-          // Combine loops based on height
-          float prominence = 0.0;
-          if (height > 4.5) {
-            prominence = loop1 * 0.4 + loop2 * 0.35 + loop3 * 0.25;
-            prominence *= smoothstep(4.5, 7.0, height);
-          }
+          // Create loop shape - rises from surface, peaks, returns
+          float loopHeight = sin(loopPhase) * 0.5 + 0.5;
+          float loopWidth = cos(loopPhase) * 0.5 + 0.5;
           
-          // Hydrogen emission color (red/pink)
-          vec3 promoColor = vec3(1.0, 0.4, 0.2);
-          float alpha = prominence * 0.8;
+          // Height-based intensity - more visible higher up
+          float heightIntensity = smoothstep(0.0, 2.5, vHeight);
           
-          gl_FragColor = vec4(promoColor, alpha);
+          // Magnetic flux variations
+          float flux = hash(floor(loopPhase * 2.0)) * 0.3 + 0.7;
+          
+          // Hydrogen/helium plasma - reddish pink
+          vec3 plasmaColor = vec3(1.0, 0.25, 0.15);
+          
+          // Bright core, fainter edges
+          float coreBrightness = smoothstep(0.8, 0.3, abs(sin(loopPhase * 1.5)));
+          
+          // Combine for final prominence
+          float prominence = loopHeight * heightIntensity * flux * (0.6 + coreBrightness * 0.4);
+          
+          // Denser at base, wispy at top
+          float density = smoothstep(2.5, 0.0, vHeight) * 0.7 + 0.3;
+          
+          float alpha = prominence * density * 0.9;
+          
+          gl_FragColor = vec4(plasmaColor, alpha);
         }
       `,
       transparent: true,
@@ -187,7 +202,7 @@ export default function Sun({ onClick }: SunProps) {
     coronaMaterial.uniforms.time.value = time;
     chromoMaterial.uniforms.time.value = time;
     photosphereMaterial.uniforms.time.value = time;
-    streamerMaterial.uniforms.time.value = time;
+    prominenceMaterial.uniforms.time.value = time;
   });
 
   const handlePointerDown = (e: any) => {
@@ -219,10 +234,10 @@ export default function Sun({ onClick }: SunProps) {
         <meshBasicMaterial color={0xff8800} transparent opacity={0.15} side={THREE.BackSide} />
       </mesh>
       
-      {/* Solar prominences - coronal loops extending into space */}
+      {/* Solar prominences - magnetic loops of cool plasma */}
       <mesh>
         <sphereGeometry args={[6.2, 32, 32]} />
-        <primitive object={streamerMaterial} attach="material" />
+        <primitive object={prominenceMaterial} attach="material" />
       </mesh>
       
       {/* Additional prominence spikes */}
