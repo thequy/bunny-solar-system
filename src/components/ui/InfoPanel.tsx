@@ -26,6 +26,8 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
       rocky: 'Hành tinh đá',
       gas_giant: 'Khí khổng lồ',
       ice_giant: 'Băng khổng lồ',
+      dwarf: 'Hành tinh lùn',
+      satellite: 'Vệ tinh',
     };
     return types[type] || type;
   };
@@ -77,21 +79,47 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
               </div>
             </div>
             <div className="stat-item">
-              <div className="stat-label">Nhiệt độ</div>
+              <div className="stat-label">Nhiệt độ bề mặt</div>
               <div className="stat-value">{planetData.temperature}°C</div>
             </div>
             <div className="stat-item">
-              <div className="stat-label">Khoảng cách</div>
+              <div className="stat-label">Khoảng cách từ Mặt Trời</div>
               <div className="stat-value">
                 {planetData.distanceFromSun} <span className="stat-unit">triệu km</span>
               </div>
             </div>
             <div className="stat-item">
               <div className="stat-label">Chu kỳ quỹ đạo</div>
-              <div className="stat-value">{planetData.orbitalPeriod} ngày</div>
+              <div className="stat-value">{planetData.orbitalPeriod.toLocaleString()} ngày</div>
             </div>
+            <div className="stat-item">
+              <div className="stat-label">Số vệ tinh</div>
+              <div className="stat-value">{planetData.moons}</div>
+            </div>
+            {planetData.hasWater !== undefined && (
+              <div className="stat-item">
+                <div className="stat-label">Có nước</div>
+                <div className="stat-value">{planetData.hasWater ? 'Có' : 'Không'}</div>
+              </div>
+            )}
+            {planetData.hasRings && (
+              <div className="stat-item">
+                <div className="stat-label">Vành đai</div>
+                <div className="stat-value">Có</div>
+              </div>
+            )}
           </div>
           <p className="planet-description">{planetData.description.vi}</p>
+          {planetData.features && planetData.features.length > 0 && (
+            <div style={{ marginTop: '12px' }}>
+              <div className="stat-label" style={{ marginBottom: '8px' }}>Đặc điểm nổi bật</div>
+              <ul style={{ paddingLeft: '20px', margin: 0, fontSize: '13px', color: '#ccc', lineHeight: '1.6' }}>
+                {planetData.features.map((feature, i) => (
+                  <li key={i}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <button 
             onClick={() => onViewCrossSection?.()}
             style={{
@@ -107,19 +135,6 @@ export default function InfoPanel({ planetData, onViewCrossSection, onClose }: I
           >
             Xem mặt cắt
           </button>
-        </div>
-      </div>
-      <div className="panel-section">
-        <div className="panel-title">Thông số nhanh</div>
-        <div className="quick-facts">
-          <div className="fact-item">
-            <span className="fact-label">Số vệ tinh</span>
-            <span className="fact-value">{planetData.moons}</span>
-          </div>
-          <div className="fact-item">
-            <span className="fact-label">Loại</span>
-            <span className="fact-value">{getTypeLabel(planetData.type)}</span>
-          </div>
         </div>
       </div>
     </aside>
