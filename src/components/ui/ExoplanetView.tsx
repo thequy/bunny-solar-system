@@ -123,7 +123,9 @@ export default function ExoplanetView() {
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
         gap: '20px',
-        paddingRight: '8px'
+        paddingRight: '8px',
+        overflowY: 'auto',
+        flex: 1
       }}>
         {filteredPlanets.map((planet, index) => (
           <div 
